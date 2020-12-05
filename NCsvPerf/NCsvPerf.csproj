@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Knapcode.NCsvPerf</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+    <PackageReference Include="CsvHelper" Version="18.0.0" />
+    <PackageReference Include="FastCsvParser" Version="1.1.1" />
+    <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
+    <PackageReference Include="mgholam.fastCSV" Version="2.0.7" />
+    <PackageReference Include="NReco.Csv" Version="1.0.0" />
+    <PackageReference Include="ServiceStack.Text" Version="5.10.2" />
+    <PackageReference Include="TinyCsvParser" Version="2.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestData\PackageAssets.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+</Project>
