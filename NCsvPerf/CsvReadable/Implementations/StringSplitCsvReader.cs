@@ -5,7 +5,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
     /// Package: N/A
-    /// Source: here :) 
+    /// Source: here :)
     /// </summary>
     public class StringSplitCsvReader : ICsvReader
     {
