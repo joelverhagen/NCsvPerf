@@ -1,6 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
@@ -21,14 +23,67 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 
         public List<PackageAsset> LatestResult { get; private set; }
 
-        [Benchmark] public void CsvHelperCsvReader() => Execute(new CsvHelperCsvReader());
-        [Benchmark] public void FastCsvParserCsvReader() => Execute(new FastCsvParserCsvReader());
-        [Benchmark] public void HomeGrownCsvReader() => Execute(new HomeGrownCsvReader());
-        [Benchmark] public void LumenWorksCsvReader() => Execute(new LumenWorksCsvReader());
-        [Benchmark] public void MgholamFastCsvReader() => Execute(new MgholamFastCsvReader());
-        [Benchmark] public void NRecoCsvReader() => Execute(new NRecoCsvReader());
-        [Benchmark] public void ServiceStackTextCsvReader() => Execute(new ServiceStackTextCsvReader());
-        [Benchmark] public void TinyCsvReader() => Execute(new TinyCsvReader());
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void CsvHelperCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new CsvHelperCsvReader(activationMethod));
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void FastCsvParserCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new FastCsvParserCsvReader(activationMethod));
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void HomeGrownCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new HomeGrownCsvReader(activationMethod));
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void LumenWorksCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new LumenWorksCsvReader(activationMethod));
+        }
+
+        [Benchmark]
+        public void MgholamFastCsvReader()
+        {
+            Execute(new MgholamFastCsvReader());
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void NRecoCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new NRecoCsvReader(activationMethod));
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void ServiceStackTextCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new ServiceStackTextCsvReader(activationMethod));
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void StringSplitCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new StringSplitCsvReader(activationMethod));
+        }
+
+        [Benchmark]
+        [ArgumentsSource(nameof(ActivationMethods))]
+        public void TinyCsvReader(ActivationMethod activationMethod)
+        {
+            Execute(new TinyCsvReader(activationMethod));
+        }
 
         private void Execute(ICsvReader reader)
         {
@@ -41,5 +96,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
                 }
             }
         }
+
+        public IEnumerable<ActivationMethod> ActivationMethods => Enum
+            .GetValues(typeof(ActivationMethod))
+            .Cast<ActivationMethod>();
     }
 }

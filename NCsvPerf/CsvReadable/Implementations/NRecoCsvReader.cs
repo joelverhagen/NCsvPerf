@@ -5,8 +5,16 @@ namespace Knapcode.NCsvPerf.CsvReadable
 {
     public class NRecoCsvReader : ICsvReader
     {
+        private readonly ActivationMethod _activationMethod;
+
+        public NRecoCsvReader(ActivationMethod activationMethod)
+        {
+            _activationMethod = activationMethod;
+        }
+
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
+            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -14,7 +22,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 var csvReader = new NReco.Csv.CsvReader(reader);
                 while (csvReader.Read())
                 {
-                    var record = new T();
+                    var record = activate();
                     record.Read(i => csvReader[i]);
                     allRecords.Add(record);
                 }
