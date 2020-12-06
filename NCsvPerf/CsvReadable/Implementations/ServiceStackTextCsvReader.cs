@@ -3,6 +3,10 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/ServiceStack.Text/
+    /// Source: https://github.com/ServiceStack/ServiceStack.Text
+    /// </summary>
     public class ServiceStackTextCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

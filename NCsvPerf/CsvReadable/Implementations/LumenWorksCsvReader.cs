@@ -3,6 +3,10 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/LumenWorksCsvReader/
+    /// Source: https://github.com/phatcher/CsvReader
+    /// </summary>
     public class LumenWorksCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

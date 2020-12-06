@@ -3,6 +3,10 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/mgholam.fastCSV/
+    /// Source: https://github.com/mgholam/fastCSV
+    /// </summary>
     public class MgholamFastCsvReader : ICsvReader
     {
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()

@@ -9,6 +9,8 @@ namespace Knapcode.NCsvPerf
     {
         NewT,
         ILEmit,
+        Activator,
+        Reflection,
     }
 
     public static class ActivatorFactory
@@ -21,6 +23,10 @@ namespace Knapcode.NCsvPerf
                     return GetNewT<T>();
                 case ActivationMethod.ILEmit:
                     return GetILEmit<T>();
+                case ActivationMethod.Activator:
+                    return GetActivator<T>();
+                case ActivationMethod.Reflection:
+                    return GetReflection<T>();
                 default:
                     throw new NotImplementedException();
             }
@@ -39,6 +45,18 @@ namespace Knapcode.NCsvPerf
             generator.Emit(OpCodes.Newobj, type.GetConstructor(Type.EmptyTypes));
             generator.Emit(OpCodes.Ret);
             return (Activate<T>)method.CreateDelegate(typeof(Activate<T>));
+        }
+
+        private static Activate<T> GetActivator<T>()
+        {
+            return () => Activator.CreateInstance<T>();
+        }
+
+        private static Activate<T> GetReflection<T>()
+        {
+            var type = typeof(T);
+            var constructor = type.GetConstructor(Type.EmptyTypes);
+            return () => (T)constructor.Invoke(null);
         }
     }
 }

@@ -4,6 +4,10 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/CsvHelper/
+    /// Source: https://github.com/JoshClose/CsvHelper
+    /// </summary>
     public class CsvHelperCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

@@ -3,6 +3,10 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: N/A
+    /// Source: here :) 
+    /// </summary>
     public class StringSplitCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

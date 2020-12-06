@@ -32,19 +32,8 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             // Act
             foreach (var benchmark in benchmarks)
             {
-                if (benchmark.GetParameters().Length == 0)
-                {
-                    benchmark.Invoke(suite, null);
-                    results.Add($"{nameof(PackageAssetsSuite)}.{benchmark.Name}()", suite.LatestResult);
-                }
-                else
-                {
-                    foreach (var activationMethod in suite.ActivationMethods)
-                    {
-                        benchmark.Invoke(suite, new object[] { activationMethod });
-                        results.Add($"{nameof(PackageAssetsSuite)}.{benchmark.Name}({nameof(ActivationMethod)}.{activationMethod})", suite.LatestResult);
-                    }
-                }
+                benchmark.Invoke(suite, null);
+                results.Add(benchmark.Name, suite.LatestResult);
             }
 
             // Assert

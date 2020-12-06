@@ -4,6 +4,10 @@ using System.Text;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/FastCsvParser/
+    /// Source: https://github.com/bopohaa/CsvParser
+    /// </summary>
     public class FastCsvParserCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

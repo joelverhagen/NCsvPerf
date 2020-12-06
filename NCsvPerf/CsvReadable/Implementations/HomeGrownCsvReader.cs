@@ -5,6 +5,10 @@ using System.Text;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: N/A
+    /// Source: see CsvUtility.cs in this repository
+    /// </summary>
     public class HomeGrownCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

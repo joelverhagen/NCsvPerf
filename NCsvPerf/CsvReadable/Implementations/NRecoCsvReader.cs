@@ -3,6 +3,10 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/NReco.Csv/
+    /// Source: https://github.com/nreco/csv
+    /// </summary>
     public class NRecoCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

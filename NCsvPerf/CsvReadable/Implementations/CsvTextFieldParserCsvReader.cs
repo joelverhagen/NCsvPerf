@@ -4,14 +4,14 @@ using System.IO;
 namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
-    /// Package: https://www.nuget.org/packages/TinyCsvParser/
-    /// Source: https://github.com/bytefish/TinyCsvParser
+    /// Package: https://www.nuget.org/packages/CsvTextFieldParser/
+    /// Source: https://github.com/22222/CsvTextFieldParser
     /// </summary>
-    public class TinyCsvReader : ICsvReader
+    public class CsvTextFieldParserCsvReader : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public TinyCsvReader(ActivationMethod activationMethod)
+        public CsvTextFieldParserCsvReader(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -23,14 +23,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                var options = new TinyCsvParser.Tokenizer.RFC4180.Options('"', '"', ',');
-                var tokenizer = new TinyCsvParser.Tokenizer.RFC4180.RFC4180Tokenizer(options);
-
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                var parser = new NotVisualBasic.FileIO.CsvTextFieldParser(reader);
+                while (!parser.EndOfData)
                 {
+                    var fields = parser.ReadFields();
                     var record = activate();
-                    var fields = tokenizer.Tokenize(line);
                     record.Read(i => fields[i]);
                     allRecords.Add(record);
                 }
