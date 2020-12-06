@@ -54,9 +54,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
                 _output.WriteLine(string.Empty);
             }
 
-            // Issue: https://github.com/mgholam/fastCSV/issues/8
-            Assert.Equal(2, groups.Count);
-            Assert.Equal(nameof(PackageAssetsSuite.MgholamFastCsvReader), Assert.Single(groups[1]));
+            Assert.Single(groups);
         }
     }
 }
