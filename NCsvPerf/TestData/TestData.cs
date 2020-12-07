@@ -60,6 +60,8 @@ namespace Knapcode.NCsvPerf
 
             private static byte[] EncodeLines(IEnumerable<string> sourceLines)
             {
+                // We ensure there is a newline at the end since some CSV parser have bugs dealing with a trailing. We
+                // want to catch that.
                 return Encoding.UTF8.GetBytes(string.Join(Environment.NewLine, sourceLines) + Environment.NewLine);
             }
         }

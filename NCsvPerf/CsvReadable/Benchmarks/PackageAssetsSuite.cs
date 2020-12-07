@@ -92,7 +92,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void SteveHansenCsvReader()
+        public void ReallySimpleCsvReader()
         {
             Execute(new ReallySimpleCsvReader(ActivationMethod.ILEmit));
         }
