@@ -6,7 +6,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
     public class PackageAssetsSuite
     {
-        private readonly byte[] _bytes;
+        private byte[] _bytes;
         private readonly bool _saveResult;
 
         public PackageAssetsSuite() : this(saveResult: false)
@@ -15,11 +15,33 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 
         public PackageAssetsSuite(bool saveResult)
         {
-            _bytes = File.ReadAllBytes(Path.Combine("TestData", "PackageAssets.csv"));
             _saveResult = saveResult;
         }
 
         public List<PackageAsset> LatestResult { get; private set; }
+
+        [ParamsSource(nameof(LineCountSource))]
+        public int LineCount { get; set; }
+
+        public static IReadOnlyList<int> LineCountSource { get; } = new[] { 0, 1, 10, 100, 1_000, 10_000, 100_000, 1_000_000 };
+
+        [GlobalSetup]
+        public void GlobalSetup()
+        {
+            _bytes = TestData.PackageAssets.GetBytes(LineCount);
+        }
+
+        private void Execute(ICsvReader reader)
+        {
+            using (var memoryStream = new MemoryStream(_bytes, writable: false))
+            {
+                var result = reader.GetRecords<PackageAsset>(memoryStream);
+                if (_saveResult)
+                {
+                    LatestResult = result;
+                }
+            }
+        }
 
         [Benchmark]
         public void CsvHelperCsvReader()
@@ -85,18 +107,6 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void TinyCsvReader()
         {
             Execute(new TinyCsvReader(ActivationMethod.ILEmit));
-        }
-
-        private void Execute(ICsvReader reader)
-        {
-            using (var memoryStream = new MemoryStream(_bytes, writable: false))
-            {
-                var result = reader.GetRecords<PackageAsset>(memoryStream);
-                if (_saveResult)
-                {
-                    LatestResult = result;
-                }
-            }
         }
     }
 }

@@ -17,8 +17,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             _output = output;
         }
 
-        [Fact]
-        public void AllBenchmarksHaveSameOutput()
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public void AllBenchmarksHaveSameOutput(int lineCount)
         {
             // Arrange
             var suite = new PackageAssetsSuite(saveResult: true);
@@ -32,6 +33,8 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             // Act
             foreach (var benchmark in benchmarks)
             {
+                suite.LineCount = lineCount;
+                suite.GlobalSetup();
                 benchmark.Invoke(suite, null);
                 results.Add(benchmark.Name, suite.LatestResult);
             }
@@ -56,5 +59,10 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 
             Assert.Single(groups);
         }
+
+        public static IEnumerable<object[]> TestData => PackageAssetsSuite
+            .LineCountSource
+            .Where(x => x <= 10_000)
+            .Select(x => new object[] { x });
     }
 }
