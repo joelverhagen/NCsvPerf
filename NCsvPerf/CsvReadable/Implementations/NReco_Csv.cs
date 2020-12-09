@@ -4,14 +4,14 @@ using System.IO;
 namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
-    /// Package: https://www.nuget.org/packages/ServiceStack.Text/
-    /// Source: https://github.com/ServiceStack/ServiceStack.Text
+    /// Package: https://www.nuget.org/packages/NReco.Csv/
+    /// Source: https://github.com/nreco/csv
     /// </summary>
-    public class ServiceStackTextCsvReader : ICsvReader
+    public class NReco_Csv : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public ServiceStackTextCsvReader(ActivationMethod activationMethod)
+        public NReco_Csv(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -23,14 +23,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                var csvReader = new NReco.Csv.CsvReader(reader);
+                while (csvReader.Read())
                 {
                     var record = activate();
-                    var fields = ServiceStack.Text.CsvReader.ParseFields(line);
-                    // Empty fields are returned as null by this library. Convert that to empty string to be more
-                    // consistent with other libraries.
-                    record.Read(i => fields[i] ?? string.Empty); 
+                    record.Read(i => csvReader[i]);
                     allRecords.Add(record);
                 }
             }

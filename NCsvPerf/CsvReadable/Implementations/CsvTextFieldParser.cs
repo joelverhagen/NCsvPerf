@@ -7,11 +7,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/CsvTextFieldParser/
     /// Source: https://github.com/22222/CsvTextFieldParser
     /// </summary>
-    public class CsvTextFieldParserCsvReader : ICsvReader
+    public class CsvTextFieldParser : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public CsvTextFieldParserCsvReader(ActivationMethod activationMethod)
+        public CsvTextFieldParser(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

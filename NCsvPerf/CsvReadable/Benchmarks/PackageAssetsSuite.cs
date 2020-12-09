@@ -46,25 +46,25 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         [Benchmark]
         public void CsvHelperCsvReader()
         {
-            Execute(new CsvHelperCsvReader(ActivationMethod.ILEmit));
+            Execute(new CsvHelper(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
         public void CsvTextFieldParserCsvReader()
         {
-            Execute(new CsvTextFieldParserCsvReader(ActivationMethod.ILEmit));
+            Execute(new CsvTextFieldParser(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
         public void FastCsvParserCsvReader()
         {
-            Execute(new FastCsvParserCsvReader(ActivationMethod.ILEmit));
+            Execute(new FastCsvParser(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
         public void HomeGrownCsvReader()
         {
-            Execute(new HomeGrownCsvReader(ActivationMethod.ILEmit));
+            Execute(new Knapcode_Csv(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -76,37 +76,37 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         [Benchmark]
         public void MgholamFastCsvReader()
         {
-            Execute(new MgholamFastCsvReader());
+            Execute(new mgholam_fastCSV());
         }
 
         [Benchmark]
         public void NRecoCsvReader()
         {
-            Execute(new NRecoCsvReader(ActivationMethod.ILEmit));
+            Execute(new NReco_Csv(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
         public void ServiceStackTextCsvReader()
         {
-            Execute(new ServiceStackTextCsvReader(ActivationMethod.ILEmit));
+            Execute(new ServiceStack_Text(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
         public void ReallySimpleCsvReader()
         {
-            Execute(new ReallySimpleCsvReader(ActivationMethod.ILEmit));
+            Execute(new Csv(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
         public void StringSplitCsvReader()
         {
-            Execute(new StringSplitCsvReader(ActivationMethod.ILEmit));
+            Execute(new string_Split(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
         public void TinyCsvReader()
         {
-            Execute(new TinyCsvReader(ActivationMethod.ILEmit));
+            Execute(new TinyCsvParser(ActivationMethod.ILEmit));
         }
     }
 }

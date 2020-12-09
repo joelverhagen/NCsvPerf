@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
-    /// Package: https://www.nuget.org/packages/FastCsvParser/
-    /// Source: https://github.com/bopohaa/CsvParser
+    /// Package: N/A
+    /// Source: here :)
     /// </summary>
-    public class FastCsvParserCsvReader : ICsvReader
+    public class string_Split : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public FastCsvParserCsvReader(ActivationMethod activationMethod)
+        public string_Split(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -22,12 +21,14 @@ namespace Knapcode.NCsvPerf.CsvReadable
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
-            using (var parser = new CsvParser.CsvReader(stream, Encoding.UTF8))
+            using (var reader = new StreamReader(stream))
             {
-                while (parser.MoveNext())
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
+                    var pieces = line.Split(',');
                     var record = activate();
-                    record.Read(i => parser.Current[i]);
+                    record.Read(i => pieces[i]);
                     allRecords.Add(record);
                 }
             }

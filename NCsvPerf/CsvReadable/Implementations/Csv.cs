@@ -7,11 +7,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/Csv/
     /// Source: https://github.com/stevehansen/csv/
     /// </summary>
-    public class ReallySimpleCsvReader : ICsvReader
+    public class Csv : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public ReallySimpleCsvReader(ActivationMethod activationMethod)
+        public Csv(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -23,13 +23,13 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                var options = new Csv.CsvOptions
+                var options = new global::Csv.CsvOptions
                 {
-                    HeaderMode = Csv.HeaderMode.HeaderAbsent,
+                    HeaderMode = global::Csv.HeaderMode.HeaderAbsent,
                     Separator = ',',
                 };
 
-                foreach (var row in Csv.CsvReader.Read(reader, options))
+                foreach (var row in global::Csv.CsvReader.Read(reader, options))
                 {
                     var record = activate();
                     record.Read(i => row[i]);

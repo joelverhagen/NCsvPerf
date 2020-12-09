@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Knapcode.NCsvPerf.HomeGrown;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
-    /// Package: https://www.nuget.org/packages/NReco.Csv/
-    /// Source: https://github.com/nreco/csv
+    /// Package: N/A
+    /// Source: see CsvUtility.cs in this repository
     /// </summary>
-    public class NRecoCsvReader : ICsvReader
+    public class Knapcode_Csv : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public NRecoCsvReader(ActivationMethod activationMethod)
+        public Knapcode_Csv(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -20,14 +22,15 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
+            var fields = new List<string>();
+            var builder = new StringBuilder();
 
             using (var reader = new StreamReader(stream))
             {
-                var csvReader = new NReco.Csv.CsvReader(reader);
-                while (csvReader.Read())
+                while (CsvUtility.TryReadLine(reader, fields, builder))
                 {
                     var record = activate();
-                    record.Read(i => csvReader[i]);
+                    record.Read(i => fields[i]);
                     allRecords.Add(record);
                 }
             }

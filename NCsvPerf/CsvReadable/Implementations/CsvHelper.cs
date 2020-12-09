@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
-    /// Package: N/A
-    /// Source: here :)
+    /// Package: https://www.nuget.org/packages/CsvHelper/
+    /// Source: https://github.com/JoshClose/CsvHelper
     /// </summary>
-    public class StringSplitCsvReader : ICsvReader
+    public class CsvHelper : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public StringSplitCsvReader(ActivationMethod activationMethod)
+        public CsvHelper(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -23,12 +24,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                var csvReader = new global::CsvHelper.CsvReader(reader, CultureInfo.InvariantCulture);
+                while (csvReader.Read())
                 {
-                    var pieces = line.Split(',');
                     var record = activate();
-                    record.Read(i => pieces[i]);
+                    record.Read(i => csvReader[i]);
                     allRecords.Add(record);
                 }
             }
