@@ -24,7 +24,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                var csvReader = CsvDataReader.Create(reader, new CsvDataReaderOptions() { HasHeaders = false });
+                var csvReader = CsvDataReader.Create(reader, new CsvDataReaderOptions() { HasHeaders = false, BufferSize = 0x10000 });
                 while (csvReader.Read())
                 {
                     var record = activate();
