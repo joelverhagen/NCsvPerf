@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
+    [MemoryDiagnoser]
     public class PackageAssetsSuite
     {
         private byte[] _bytes;
@@ -36,6 +37,10 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             using (var memoryStream = new MemoryStream(_bytes, writable: false))
             {
                 var result = reader.GetRecords<PackageAsset>(memoryStream);
+                if(result.Count != LineCount)
+                {
+                    throw new System.Exception("Failed to produce correct number of rows");
+                }
                 if (_saveResult)
                 {
                     LatestResult = result;
@@ -43,7 +48,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             }
         }
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public void CsvHelperCsvReader()
         {
             Execute(new CsvHelper(ActivationMethod.ILEmit));
@@ -107,6 +112,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void TinyCsvReader()
         {
             Execute(new TinyCsvParser(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void SylvanCsvReader()
+        {
+            Execute(new SylvanCsv(ActivationMethod.ILEmit));
         }
     }
 }
