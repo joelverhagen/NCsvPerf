@@ -37,10 +37,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             using (var memoryStream = new MemoryStream(_bytes, writable: false))
             {
                 var result = reader.GetRecords<PackageAsset>(memoryStream);
+
                 if(result.Count != LineCount)
                 {
-                    throw new System.Exception("Failed to produce correct number of rows");
+                    throw new InvalidDataException($"ICsvReader '{reader.GetType().FullName}' failed to produce correct number of rows. Expected: {LineCount}, actual: {result.Count}.");
                 }
+                
                 if (_saveResult)
                 {
                     LatestResult = result;
@@ -48,7 +50,6 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             }
         }
 
-        [Benchmark(Baseline = true)]
         public void CsvHelperCsvReader()
         {
             Execute(new CsvHelper(ActivationMethod.ILEmit));
@@ -102,7 +103,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             Execute(new Csv(ActivationMethod.ILEmit));
         }
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public void StringSplitCsvReader()
         {
             Execute(new string_Split(ActivationMethod.ILEmit));
