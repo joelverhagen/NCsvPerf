@@ -12,6 +12,7 @@
     <PackageReference Include="CsvHelper" Version="19.0.0" />
     <PackageReference Include="CsvTextFieldParser" Version="1.2.1" />
     <PackageReference Include="FastCsvParser" Version="1.1.1" />
+    <PackageReference Include="FluentCSV" Version="2.0.0" />
     <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
     <PackageReference Include="mgholam.fastCSV" Version="2.0.9" />
     <PackageReference Include="NReco.Csv" Version="1.0.0" />

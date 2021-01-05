@@ -9,11 +9,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: N/A
     /// Source: see CsvUtility.cs in this repository
     /// </summary>
-    public class Knapcode_Csv : ICsvReader
+    public class HomeGrown : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public Knapcode_Csv(ActivationMethod activationMethod)
+        public HomeGrown(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

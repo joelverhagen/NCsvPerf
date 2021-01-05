@@ -36,12 +36,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 
         private static Guid? ParseNullableGuid(string input)
         {
-            return input.Length > 0 ? Guid.Parse(input) : (Guid?)null;
+            return input.Length > 0 ? Guid.Parse(input) : null;
         }
 
         private static DateTimeOffset? ParseNullableDateTimeOffset(string input)
         {
-            return input.Length > 0 ? ParseDateTimeOffset(input) : (DateTimeOffset?)null;
+            return input.Length > 0 ? ParseDateTimeOffset(input) : null;
         }
 
         private static DateTimeOffset ParseDateTimeOffset(string input)

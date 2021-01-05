@@ -9,11 +9,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/Sylvan.Data.Csv/
     /// Source: https://github.com/MarkPflug/Sylvan
     /// </summary>
-    public class SylvanCsv : ICsvReader
+    public class Sylvan_Data_Csv : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public SylvanCsv(ActivationMethod activationMethod)
+        public Sylvan_Data_Csv(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -27,13 +27,14 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                var opts = new CsvDataReaderOptions() {
+                var options = new CsvDataReaderOptions
+                {
                     HasHeaders = false,
                     BufferSize = 0x10000,
-                    StringFactory = stringPool.GetString
+                    StringFactory = stringPool.GetString,
                 };
 
-                var csvReader = CsvDataReader.Create(reader, opts);
+                var csvReader = CsvDataReader.Create(reader, options);
                 while (csvReader.Read())
                 {
                     var record = activate();
