@@ -50,6 +50,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             }
         }
 
+        [Benchmark]
         public void CsvHelper()
         {
             Execute(new CsvHelper(ActivationMethod.ILEmit));
@@ -109,7 +110,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             Execute(new Csv(ActivationMethod.ILEmit));
         }
 
-        [Benchmark(Baseline = true)]
+        [Benchmark]
         public void string_Split()
         {
             Execute(new string_Split(ActivationMethod.ILEmit));
