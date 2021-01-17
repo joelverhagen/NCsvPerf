@@ -24,11 +24,15 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                var csvReader = new global::CsvHelper.CsvReader(reader, CultureInfo.InvariantCulture);
-                while (csvReader.Read())
+                var config = new global::CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    CacheFields = true,
+                };
+                var csvParser = new global::CsvHelper.CsvParser(reader, config);
+                while (csvParser.Read())
                 {
                     var record = activate();
-                    record.Read(i => csvReader[i]);
+                    record.Read(i => csvParser[i]);
                     allRecords.Add(record);
                 }
             }
