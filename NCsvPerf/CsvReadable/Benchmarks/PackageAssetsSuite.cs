@@ -63,6 +63,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Cursively()
+        {
+            Execute(new CursivelyCsvReader(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void FastCsvParser()
         {
             Execute(new FastCsvParser(ActivationMethod.ILEmit));
