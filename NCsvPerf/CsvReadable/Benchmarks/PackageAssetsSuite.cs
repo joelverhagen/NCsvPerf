@@ -99,6 +99,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Microsoft_VisualBasic_FileIO_TextFieldParser()
+        {
+            Execute(new Microsoft_VisualBasic_FileIO_TextFieldParser(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void NReco_Csv()
         {
             Execute(new NReco_Csv(ActivationMethod.ILEmit));
