@@ -1,5 +1,7 @@
 # NCsvPerf
 
+![Build](https://github.com/joelverhagen/NCsvPerf/workflows/Build/badge.svg)
+
 A test bench for various .NET CSV parsing libraries.
 
 See my blog post for motivation, results, etc:
