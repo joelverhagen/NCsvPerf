@@ -69,6 +69,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Ctl_Data()
+        {
+            Execute(new Ctl_Data(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void Cursively()
         {
             Execute(new Cursively(ActivationMethod.ILEmit));
