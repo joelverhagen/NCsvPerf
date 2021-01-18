@@ -22,8 +22,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
-            // 64 should fully cover the values in the dataset.
-            var stringPool = new StringPool(64); 
+            var stringPool = new StringPool(128); 
 
             using (var reader = new StreamReader(stream))
             {
