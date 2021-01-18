@@ -3,6 +3,10 @@ using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/SoftCircuits.CsvParser/
+    /// Source: https://github.com/SoftCircuits/CsvParser
+    /// </summary>
     public class SoftCircuits_CsvParser : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

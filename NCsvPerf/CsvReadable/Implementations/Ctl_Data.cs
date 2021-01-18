@@ -4,6 +4,10 @@ using Ctl.Data;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/Ctl.Data/
+    /// Source: https://github.com/ctl-global/ctl-data/
+    /// </summary>
     public class Ctl_Data : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;

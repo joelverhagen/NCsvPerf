@@ -4,6 +4,10 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
+    /// <summary>
+    /// Package: N/A
+    /// Source: https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.VisualBasic.Core/src/Microsoft/VisualBasic/FileIO/TextFieldParser.vb
+    /// </summary>
     public class Microsoft_VisualBasic_FileIO_TextFieldParser : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
