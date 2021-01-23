@@ -51,6 +51,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Csv()
+        {
+            Execute(new Csv(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void CsvHelper()
         {
             Execute(new CsvHelper(ActivationMethod.ILEmit));
@@ -60,6 +66,18 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void CsvTextFieldParser()
         {
             Execute(new CsvTextFieldParser(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void Ctl_Data()
+        {
+            Execute(new Ctl_Data(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void Cursively()
+        {
+            Execute(new Cursively(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -93,6 +111,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Microsoft_VisualBasic_FileIO_TextFieldParser()
+        {
+            Execute(new Microsoft_VisualBasic_FileIO_TextFieldParser(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void NReco_Csv()
         {
             Execute(new NReco_Csv(ActivationMethod.ILEmit));
@@ -105,15 +129,15 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void Csv()
-        {
-            Execute(new Csv(ActivationMethod.ILEmit));
-        }
-
-        [Benchmark]
         public void string_Split()
         {
             Execute(new string_Split(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void SoftCircuits_CsvParser()
+        {
+            Execute(new SoftCircuits_CsvParser(ActivationMethod.ILEmit));
         }
 
         [Benchmark]

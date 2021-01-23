@@ -7,6 +7,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// <summary>
     /// Package: https://www.nuget.org/packages/FastCsvParser/
     /// Source: https://github.com/bopohaa/CsvParser
+    /// 
+    /// I had to reference my own fork of this project because "CsvParser.dll" collided with SoftCircuits.CsvParser.
+    /// The fork is here: https://www.nuget.org/packages/Knapcode.FastCsvParser/
+    /// I notified the owner here: https://github.com/bopohaa/CsvParser/issues/3
     /// </summary>
     public class FastCsvParser : ICsvReader
     {
@@ -22,7 +26,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
-            using (var parser = new CsvParser.CsvReader(stream, Encoding.UTF8))
+            using (var parser = new global::FastCsvParser.CsvReader(stream, Encoding.UTF8))
             {
                 while (parser.MoveNext())
                 {
