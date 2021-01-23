@@ -129,6 +129,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Sky_Data_Csv()
+        {
+            Execute(new Sky_Data_Csv(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void string_Split()
         {
             Execute(new string_Split(ActivationMethod.ILEmit));
