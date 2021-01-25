@@ -21,7 +21,7 @@
     <PackageReference Include="ServiceStack.Text" Version="5.10.4" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="2.4.3" />
     <PackageReference Include="Sylvan.Common" Version="0.2.0" />
-    <PackageReference Include="Sylvan.Data.Csv" Version="0.9.0" />
+    <PackageReference Include="Sylvan.Data.Csv" Version="0.9.1" />
     <PackageReference Include="TinyCsvParser" Version="2.6.0" />
   </ItemGroup>
 
