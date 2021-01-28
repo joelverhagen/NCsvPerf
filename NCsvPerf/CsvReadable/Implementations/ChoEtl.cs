@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using Sylvan;
-using Sylvan.Data.Csv;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
-    /// <summary>
-    /// Package: https://www.nuget.org/packages/Sylvan.Data.Csv/
-    /// Source: https://github.com/MarkPflug/Sylvan
-    /// </summary>
-    public class Sylvan_Data_Csv : ICsvReader
-    {
+	/// <summary>
+	/// Package: https://www.nuget.org/packages/ChoETL/
+	/// Source: https://github.com/Cinchoo/ChoETL
+	/// </summary>
+	public class ChoEtl : ICsvReader
+	{
         private readonly ActivationMethod _activationMethod;
 
-        public Sylvan_Data_Csv(ActivationMethod activationMethod)
+        public ChoEtl(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }
@@ -22,20 +24,21 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
-            var stringPool = new StringPool(128); 
 
-            using (var reader = new StreamReader(stream))
+            var config = new ChoETL.ChoCSVRecordConfiguration
             {
-                var options = new CsvDataReaderOptions
-                {
-                    HasHeaders = false,
-                    BufferSize = 0x10000,
-                    StringFactory = stringPool.GetString,
-                };
-
-                var csvReader = CsvDataReader.Create(reader, options);
+                FileHeaderConfiguration = new ChoETL.ChoCSVFileHeaderConfiguration
+				{
+                    HasHeaderRecord = false,
+				},
+            };
+            using (var reader = new StreamReader(stream))
+            using (var csvReader = new global::ChoETL.ChoCSVReader(reader, config).AsDataReader())
+            {
+                var count = 0;
                 while (csvReader.Read())
                 {
+                    count++;
                     var record = activate();
                     record.Read(i => csvReader.GetString(i));
                     allRecords.Add(record);

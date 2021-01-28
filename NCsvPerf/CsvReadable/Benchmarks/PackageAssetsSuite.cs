@@ -51,6 +51,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void ChoEtl()
+        {
+            Execute(new ChoEtl(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void Csv()
         {
             Execute(new Csv(ActivationMethod.ILEmit));
@@ -99,6 +105,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void LinqToCsv()
+        {
+            Execute(new LinqToCsv(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void LumenWorksCsvReader()
         {
             Execute(new LumenWorksCsvReader(ActivationMethod.ILEmit));
@@ -126,6 +138,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void ServiceStack_Text()
         {
             Execute(new ServiceStack_Text(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void Sky_Data_Csv()
+        {
+            Execute(new Sky_Data_Csv(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
