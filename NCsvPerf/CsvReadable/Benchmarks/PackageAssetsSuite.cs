@@ -105,6 +105,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void LinqToCsv()
+        {
+            Execute(new LinqToCsv(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void LumenWorksCsvReader()
         {
             Execute(new LumenWorksCsvReader(ActivationMethod.ILEmit));
