@@ -36,7 +36,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 				foreach (var row in cc.Read<DataRow>(reader, desc))
 				{
 					var record = activate();
-					record.Read(i => row[i].Value);
+					record.Read(i => row[i].Value ?? string.Empty);
 					allRecords.Add(record);
 				}
 			}
