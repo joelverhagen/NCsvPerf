@@ -18,6 +18,7 @@
     <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
     <PackageReference Include="mgholam.fastCSV" Version="2.0.9" />
     <PackageReference Include="NReco.Csv" Version="1.0.0" />
+    <PackageReference Include="SEA.CommonLibrary.NET" Version="0.9.8.8" />
     <PackageReference Include="ServiceStack.Text" Version="5.10.4" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="2.4.3" />
     <PackageReference Include="Sylvan.Common" Version="0.2.0" />
