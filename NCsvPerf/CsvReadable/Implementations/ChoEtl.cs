@@ -25,8 +25,15 @@ namespace Knapcode.NCsvPerf.CsvReadable
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
+            var config = new ChoETL.ChoCSVRecordConfiguration
+            {
+                FileHeaderConfiguration = new ChoETL.ChoCSVFileHeaderConfiguration
+				{
+                    HasHeaderRecord = false,
+				},
+            };
             using (var reader = new StreamReader(stream))
-            using (var csvReader = new global::ChoETL.ChoCSVReader(reader).AsDataReader())
+            using (var csvReader = new global::ChoETL.ChoCSVReader(reader, config).AsDataReader())
             {
                 var count = 0;
                 while (csvReader.Read())
