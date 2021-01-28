@@ -10,6 +10,7 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
     <PackageReference Include="ChoETL" Version="1.2.1.5" />
     <PackageReference Include="Csv" Version="2.0.62" />
+    <PackageReference Include="CSVFile" Version="2.0.3" />
     <PackageReference Include="CsvHelper" Version="20.0.0" />
     <PackageReference Include="CsvTextFieldParser" Version="1.2.1" />
     <PackageReference Include="Ctl.Data" Version="2.0.0.2" />
