@@ -63,6 +63,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void CSVFile()
+        {
+            Execute(new CSVFile(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void CsvHelper()
         {
             Execute(new CsvHelper(ActivationMethod.ILEmit));
