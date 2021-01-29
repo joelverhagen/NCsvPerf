@@ -105,6 +105,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void FlatFiles()
+        {
+            Execute(new FlatFiles(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void FluentCsv()
         {
             Execute(new FluentCsv(ActivationMethod.ILEmit));

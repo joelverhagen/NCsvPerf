@@ -16,6 +16,7 @@
     <PackageReference Include="CsvTools" Version="1.0.12" />
     <PackageReference Include="Ctl.Data" Version="2.0.0.2" />
     <PackageReference Include="Cursively" Version="1.2.0" />
+    <PackageReference Include="FlatFiles" Version="4.13.0" />
     <PackageReference Include="Knapcode.FastCsvParser" Version="1.1.0" />
     <PackageReference Include="FluentCSV" Version="2.0.0" />
     <PackageReference Include="LinqToCsv" Version="1.5.0" />
