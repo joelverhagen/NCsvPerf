@@ -75,6 +75,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void CsvTools()
+        {
+            Execute(new CsvTools(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void Ctl_Data()
         {
             Execute(new Ctl_Data(ActivationMethod.ILEmit));
