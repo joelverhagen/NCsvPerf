@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
-	/// <summary>
-	/// Package: https://www.nuget.org/packages/ChoETL/
-	/// Source: https://github.com/Cinchoo/ChoETL
-	/// </summary>
-	public class ChoEtl : ICsvReader
-	{
+    /// <summary>
+    /// Package: https://www.nuget.org/packages/ChoETL/
+    /// Source: https://github.com/Cinchoo/ChoETL
+    /// </summary>
+    public class ChoEtl : ICsvReader
+    {
         private readonly ActivationMethod _activationMethod;
 
         public ChoEtl(ActivationMethod activationMethod)
@@ -28,9 +24,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             var config = new ChoETL.ChoCSVRecordConfiguration
             {
                 FileHeaderConfiguration = new ChoETL.ChoCSVFileHeaderConfiguration
-				{
+                {
                     HasHeaderRecord = false,
-				},
+                },
             };
             using (var reader = new StreamReader(stream))
             using (var csvReader = new global::ChoETL.ChoCSVReader(reader, config).AsDataReader())

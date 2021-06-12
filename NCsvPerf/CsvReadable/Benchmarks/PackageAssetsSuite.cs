@@ -1,6 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using BenchmarkDotNet.Attributes;
 
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
@@ -38,11 +38,11 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             {
                 var result = reader.GetRecords<PackageAsset>(memoryStream);
 
-                if(result.Count != LineCount)
+                if (result.Count != LineCount)
                 {
                     throw new InvalidDataException($"ICsvReader '{reader.GetType().FullName}' failed to produce correct number of rows. Expected: {LineCount}, actual: {result.Count}.");
                 }
-                
+
                 if (_saveResult)
                 {
                     LatestResult = result;
@@ -58,9 +58,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 
         [Benchmark]
         public void CommonLibrary_Net()
-		{
+        {
             Execute(new CommonLibrary_Net(ActivationMethod.ILEmit));
-		}
+        }
 
         [Benchmark]
         public void Csv()

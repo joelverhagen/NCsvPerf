@@ -4,9 +4,9 @@ using Knapcode.NCsvPerf.CsvReadable.TestCases;
 
 namespace Knapcode.NCsvPerf
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             IConfig config = null;
 #if DEBUG

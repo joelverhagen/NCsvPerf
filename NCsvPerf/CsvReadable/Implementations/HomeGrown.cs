@@ -1,7 +1,7 @@
-﻿using Knapcode.NCsvPerf.HomeGrown;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Knapcode.NCsvPerf.HomeGrown;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {

@@ -1,8 +1,8 @@
-using BenchmarkDotNet.Attributes;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BenchmarkDotNet.Attributes;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 

@@ -30,7 +30,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     var fields = ServiceStack.Text.CsvReader.ParseFields(line);
                     // Empty fields are returned as null by this library. Convert that to empty string to be more
                     // consistent with other libraries.
-                    record.Read(i => fields[i] ?? string.Empty); 
+                    record.Read(i => fields[i] ?? string.Empty);
                     allRecords.Add(record);
                 }
             }

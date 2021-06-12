@@ -29,7 +29,10 @@ namespace Knapcode.NCsvPerf
                 _lineCountToBytes = new ConcurrentDictionary<int, byte[]>();
             }
 
-            public byte[] GetBytes(int lineCount) => _lineCountToBytes.GetOrAdd(lineCount, GetBytesUncached);
+            public byte[] GetBytes(int lineCount)
+            {
+                return _lineCountToBytes.GetOrAdd(lineCount, GetBytesUncached);
+            }
 
             private byte[] GetBytesUncached(int lineCount)
             {

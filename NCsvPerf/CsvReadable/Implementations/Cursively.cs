@@ -126,9 +126,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 }
 
                 var entries = _entries;
-                uint hashCode = GetHashCode(bytes);
-                ref int bucket = ref GetBucket(hashCode);
-                int i = bucket - 1;
+                var hashCode = GetHashCode(bytes);
+                ref var bucket = ref GetBucket(hashCode);
+                var i = bucket - 1;
                 while ((uint)i < (uint)entries.Length)
                 {
                     ref var e = ref entries[i];
@@ -152,13 +152,13 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     _saveBufUsed = 0;
                 }
 
-                int bufStart = _saveBufUsed;
+                var bufStart = _saveBufUsed;
                 bytes.CopyTo(_saveBuf.AsSpan(bufStart, bytes.Length));
                 _saveBufUsed += bytes.Length;
 
-                string s = Encoding.UTF8.GetString(bytes);
+                var s = Encoding.UTF8.GetString(bytes);
 
-                int index = _count++;
+                var index = _count++;
 
                 ref var entry = ref entries[index];
                 entry.buf = _saveBuf;
@@ -195,7 +195,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             private static uint GetHashCode(ReadOnlySpan<byte> input)
             {
-                ulong hc64 = XXH64(input);
+                var hc64 = XXH64(input);
                 return (uint)hc64 ^ (uint)(hc64 >> 32);
             }
 
@@ -216,9 +216,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 };
 
                 ulong h = 0;
-                ref byte inputStart = ref AsRef(in input.GetPinnableReference());
-                uint originalLength = (uint)input.Length;
-                uint remainingLength = originalLength;
+                ref var inputStart = ref AsRef(in input.GetPinnableReference());
+                var originalLength = (uint)input.Length;
+                var remainingLength = originalLength;
                 if (remainingLength >= 32)
                 {
                     // feels like SIMD could help this loop, since each iteration only looks at the
@@ -286,17 +286,17 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             private Entry[] Resize()
             {
-                int count = _count;
+                var count = _count;
                 Array.Resize(ref _entries, count * 2);
 
                 var entries = _entries;
                 _buckets = new int[entries.Length * 2];
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
                     ref var e = ref entries[i];
                     if (e.next >= -1)
                     {
-                        ref int bucket = ref GetBucket(e.hashCode);
+                        ref var bucket = ref GetBucket(e.hashCode);
                         e.next = bucket - 1;
                         bucket = i + 1;
                     }
@@ -306,9 +306,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            ref int GetBucket(ulong hashCode)
+            private ref int GetBucket(ulong hashCode)
             {
-                int[] buckets = _buckets;
+                var buckets = _buckets;
                 return ref buckets[hashCode & ((uint)buckets.Length - 1)];
             }
 
