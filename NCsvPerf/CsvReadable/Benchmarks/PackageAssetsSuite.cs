@@ -57,6 +57,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void CommonLibrary_Net()
+		{
+            Execute(new CommonLibrary_Net(ActivationMethod.ILEmit));
+		}
+
+        [Benchmark]
         public void Csv()
         {
             Execute(new Csv(ActivationMethod.ILEmit));
