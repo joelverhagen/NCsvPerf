@@ -4,8 +4,11 @@ using System.IO;
 namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
-    /// Package: https://www.nuget.org/packages/CommonLibrary.NET/
+    /// Package: https://www.nuget.org/packages/Knapcode.CommonLibrary.NET/
     /// Source: https://archive.codeplex.com/?p=commonlibrarynet
+    /// 
+    /// I had to reference my own fork of this project because it did not support LF (Unix-style) line endings and did
+    /// not seem to have an official distribution on NuGet.org.
     /// </summary>
     public class CommonLibrary_Net : ICsvReader
     {

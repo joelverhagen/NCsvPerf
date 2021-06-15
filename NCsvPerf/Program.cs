@@ -12,9 +12,8 @@ namespace Knapcode.NCsvPerf
 #if DEBUG
             config = new DebugInProcessConfig();
 #else
-            config = DefaultConfig.Instance;
+            config = null;
 #endif
-            config = config.WithOption(ConfigOptions.DisableOptimizationsValidator, value: true);
             BenchmarkRunner.Run<PackageAssetsSuite>(config);
         }
     }

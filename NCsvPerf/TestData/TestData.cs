@@ -65,11 +65,7 @@ namespace Knapcode.NCsvPerf
             {
                 // We ensure there is a newline at the end since some CSV parser have bugs dealing with a trailing. We
                 // want to catch that.
-                //
-                // We use CR LF consistently instead of Environment.NewLine because some libraries (e.g. CommonLibrary.NET)
-                // does not handled Unix-style LF gracefully.
-                const string NewLine = "\r\n";
-                return Encoding.UTF8.GetBytes(string.Join(NewLine, sourceLines) + NewLine);
+                return Encoding.UTF8.GetBytes(string.Join(Environment.NewLine, sourceLines) + Environment.NewLine);
             }
         }
     }
