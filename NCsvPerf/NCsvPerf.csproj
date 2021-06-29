@@ -29,7 +29,12 @@
     <PackageReference Include="SoftCircuits.CsvParser" Version="3.0.0" />
     <PackageReference Include="Sylvan.Common" Version="0.2.1" />
     <PackageReference Include="Sylvan.Data.Csv" Version="1.0.3" />
+    <PackageReference Include="System.IO.Pipelines" Version="5.0.1" />
     <PackageReference Include="TinyCsvParser" Version="2.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\RecordParser\RecordParser\RecordParser.csproj" />
   </ItemGroup>
 
   <ItemGroup>
