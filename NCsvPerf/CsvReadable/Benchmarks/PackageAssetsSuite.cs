@@ -51,6 +51,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void RecordParser()
+        {
+            Execute(new RecordParser(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void ChoEtl()
         {
             Execute(new ChoEtl(ActivationMethod.ILEmit));

@@ -35,10 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\RecordParser\RecordParser\RecordParser.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="TestData\PackageAssets.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
