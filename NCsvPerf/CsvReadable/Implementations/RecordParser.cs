@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipelines;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Knapcode.NCsvPerf.CsvReadable
@@ -39,6 +38,15 @@ namespace Knapcode.NCsvPerf.CsvReadable
             return result;
         }
 
+        private static Expression<Func<string[], string>> buildExpression(int i)
+        {
+            var arrayExpr = Expression.Parameter(typeof(string[]));
+            var indexExpr = Expression.Constant(i);
+            var arrayAccessExpr = Expression.ArrayAccess(arrayExpr, indexExpr);
+
+            return Expression.Lambda<Func<string[], string>>(arrayAccessExpr, arrayExpr);
+        }
+
         private static global::RecordParser.Parsers.IVariableLengthReader<string[]> BuildReader<T>(Activate<T> activate) where T : ICsvReadable
         {
             var columnCount = activate().GetColumnCount();
@@ -66,15 +74,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 return cache.TryGetValue(key, out var text)
                 ? text
                 : cache[key] = new string(span);
-            }
-
-            static Expression<Func<string[], string>> buildExpression(int i)
-            {
-                var arrayExpr = Expression.Parameter(typeof(string[]));
-                var indexExpr = Expression.Constant(i);
-                var arrayAccessExpr = Expression.ArrayAccess(arrayExpr, indexExpr);
-
-                return Expression.Lambda<Func<string[], string>>(arrayAccessExpr, arrayExpr);
             }
         }
 
