@@ -49,7 +49,7 @@ namespace Knapcode.NCsvPerf
 
         private static Activate<T> GetActivator<T>()
         {
-            return () => Activator.CreateInstance<T>();
+            return Activator.CreateInstance<T>;
         }
 
         private static Activate<T> GetReflection<T>()
