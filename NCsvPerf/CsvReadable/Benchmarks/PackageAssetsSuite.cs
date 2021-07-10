@@ -193,5 +193,10 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         {
             Execute(new TinyCsvParser(ActivationMethod.ILEmit));
         }
+        [Benchmark]
+        public void TxtCsvHelper()
+        {
+            Execute(new TxtCsvHelper(ActivationMethod.ILEmit));
+        }
     }
 }

@@ -30,6 +30,8 @@
     <PackageReference Include="Sylvan.Common" Version="0.2.1" />
     <PackageReference Include="Sylvan.Data.Csv" Version="1.0.3" />
     <PackageReference Include="TinyCsvParser" Version="2.6.0" />
+
+    <PackageReference Include="TxtCsvHelper" Version="1.2.8" />
   </ItemGroup>
 
   <ItemGroup>
