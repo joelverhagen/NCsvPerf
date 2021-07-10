@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ben.Collections.Specialized;
+using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
@@ -51,30 +52,15 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var columnCount = activate().GetColumnCount();
             var buffer = new string[columnCount];
-            var builder = new global::RecordParser.Builders.Reader.VariableLengthReaderBuilder<string[]>();
+            var builder = new global::RecordParser.Builders.Reader.VariableLengthReaderSequentialBuilder<string[]>();
+            var cache = new InternPool();
 
-            for (var i = 0; i < buffer.Length; i++)
-                builder.Map(buildExpression(i), i);
-
-            var cache = new Dictionary<int, string>()
-            {
-                [string.GetHashCode(Span<char>.Empty)] = string.Empty
-            };
-
-            builder.DefaultTypeConvert(GetOrAddString);
+            for (var i = 0; i < columnCount; i++)
+                builder.Map(buildExpression(i), cache.Intern);
 
             var reader = builder.Build(",", factory: () => buffer);
 
             return reader;
-
-            string GetOrAddString(ReadOnlySpan<char> span)
-            {
-                var key = string.GetHashCode(span);
-
-                return cache.TryGetValue(key, out var text)
-                ? text
-                : cache[key] = new string(span);
-            }
         }
 
         private static List<T> ProcessStream<T>(MemoryStream stream, FuncSpanT<T> parser)

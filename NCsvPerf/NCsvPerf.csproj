@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ben.StringIntern" Version="0.1.8" />
     <PackageReference Include="BenchmarkDotNet" Version="0.13.0" />
     <PackageReference Include="ChoETL" Version="1.2.1.18" />
     <PackageReference Include="Csv" Version="2.0.62" />
@@ -39,5 +40,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  
+
 </Project>
