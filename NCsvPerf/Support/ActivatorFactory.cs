@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Reflection.Emit;
 
 namespace Knapcode.NCsvPerf
@@ -11,6 +12,7 @@ namespace Knapcode.NCsvPerf
         ILEmit,
         Activator,
         Reflection,
+        ExpressionTree,
     }
 
     public static class ActivatorFactory
@@ -27,6 +29,8 @@ namespace Knapcode.NCsvPerf
                     return GetActivator<T>();
                 case ActivationMethod.Reflection:
                     return GetReflection<T>();
+                case ActivationMethod.ExpressionTree:
+                    return GetExpressionTree<T>();
                 default:
                     throw new NotImplementedException();
             }
@@ -57,6 +61,15 @@ namespace Knapcode.NCsvPerf
             var type = typeof(T);
             var constructor = type.GetConstructor(Type.EmptyTypes);
             return () => (T)constructor.Invoke(null);
+        }
+
+        private static Activate<T> GetExpressionTree<T>()
+        {
+            var type = typeof(T);
+            var constructor = type.GetConstructor(Type.EmptyTypes);
+            var lambdaExp = Expression.Lambda<Activate<T>>(Expression.New(constructor));
+
+            return lambdaExp.Compile();
         }
     }
 }
