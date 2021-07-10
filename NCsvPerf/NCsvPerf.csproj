@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ben.StringIntern" Version="0.1.8" />
     <PackageReference Include="BenchmarkDotNet" Version="0.13.0" />
     <PackageReference Include="ChoETL" Version="1.2.1.18" />
     <PackageReference Include="Csv" Version="2.0.62" />
@@ -24,11 +25,13 @@
     <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
     <PackageReference Include="mgholam.fastCSV" Version="2.0.9" />
     <PackageReference Include="NReco.Csv" Version="1.0.0" />
+    <PackageReference Include="RecordParser" Version="1.2.0" />
     <PackageReference Include="ServiceStack.Text" Version="5.11.0" />
     <PackageReference Include="Sky.Data.Csv" Version="2.5.0" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="3.0.0" />
     <PackageReference Include="Sylvan.Common" Version="0.2.1" />
     <PackageReference Include="Sylvan.Data.Csv" Version="1.0.3" />
+    <PackageReference Include="System.IO.Pipelines" Version="5.0.1" />
     <PackageReference Include="TinyCsvParser" Version="2.6.0" />
 
     <PackageReference Include="TxtCsvHelper" Version="1.2.8" />
@@ -39,5 +42,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  
+
 </Project>
