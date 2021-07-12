@@ -4,7 +4,7 @@ using Knapcode.NCsvPerf.CsvReadable.TestCases;
 
 namespace Knapcode.NCsvPerf
 {
-    internal class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
