@@ -26,12 +26,18 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var reader = BuildReader(activate);
+
+            string[] fields = null;
+            // closure over fields only allocated once
+            Func<int, string> getFields = i => fields[i];
+
             var result = ProcessStream<T>(stream, spanLine =>
             {
-                var fields = reader.Parse(spanLine);
+                fields = reader.Parse(spanLine);
+
                 var record = activate();
 
-                record.Read(i => fields[i]);
+                record.Read(getFields);
 
                 return record;
             });
