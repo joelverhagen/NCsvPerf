@@ -60,9 +60,14 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             Assert.Single(groups);
         }
 
-        public static IEnumerable<object[]> TestData => PackageAssetsSuite
-            .LineCountSource
-            .Where(x => x <= 10_000)
-            .Select(x => new object[] { x });
+        public static IEnumerable<object[]> TestData
+        {
+            get {
+                yield return new object[] { 0 };
+                yield return new object[] { 1 };
+                yield return new object[] { 100 };
+                yield return new object[] { 10_000 };
+            }
+        }
     }
 }
