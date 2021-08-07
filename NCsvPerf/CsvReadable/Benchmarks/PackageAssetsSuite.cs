@@ -49,11 +49,17 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
                 }
             }
         }
-                
+
         [Benchmark]
         public void AngaraTable()
         {
             Execute(new AngaraTable(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void Cesil()
+        {
+            Execute(new Cesil(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -169,7 +175,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         {
             Execute(new mgholam_fastCSV());
         }
-        
+
         [Benchmark]
         public void MicrosoftML()
         {
@@ -194,9 +200,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             Execute(new NReco_Csv(ActivationMethod.ILEmit));
         }
 
-        //[Benchmark] 
+        //[Benchmark]
         // this library currently fails correctness tests
-        // it seems to skip empty columns, and I see no way to 
+        // it seems to skip empty columns, and I see no way to
         // access the column index.
         public void Open_Text_CSV()
         {
@@ -244,6 +250,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         {
             Execute(new TinyCsvParser(ActivationMethod.ILEmit));
         }
+
         [Benchmark]
         public void TxtCsvHelper()
         {
