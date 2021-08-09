@@ -5,6 +5,7 @@ using BenchmarkDotNet.Attributes;
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
     [MemoryDiagnoser]
+    [SimpleJob(1, 2, 4, 1)]
     public class PackageAssetsSuite
     {
         private byte[] _bytes;
@@ -24,7 +25,11 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         [ParamsSource(nameof(LineCountSource))]
         public int LineCount { get; set; }
 
-        public static IReadOnlyList<int> LineCountSource { get; } = new[] { 0, 1, 10, 100, 1_000, 10_000, 100_000, 1_000_000 };
+        public static IReadOnlyList<int> LineCountSource { get; } =
+            new[] { 
+                //0, 1, 10, 100, 1_000, 10_000, 100_000, 
+                1_000_000
+            };
 
         [GlobalSetup]
         public void GlobalSetup()
