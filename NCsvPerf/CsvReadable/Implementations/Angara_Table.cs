@@ -9,7 +9,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
     /// Package: https://www.nuget.org/packages/Angara.Table
-    /// Source: https://github.com/microsoft/Angara.Table
+    /// Source: https://github.com/predictionmachines/Angara.Table
     /// </summary>
     public class Angara_Table : ICsvReader
     {
