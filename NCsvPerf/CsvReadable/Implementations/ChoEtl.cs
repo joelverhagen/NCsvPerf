@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Knapcode.NCsvPerf.CsvReadable.TestCases;
+using System.Collections.Generic;
 using System.IO;
+using static Knapcode.NCsvPerf.CsvReadable.FileHelpers;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
@@ -9,17 +11,18 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class ChoEtl : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public ChoEtl(ActivationMethod activationMethod)
+        public ChoEtl(ActivationMethod _)
         {
-            _activationMethod = activationMethod;
         }
 
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var allRecords = new List<T>();
+            return GetAssets(stream) as List<T>;
+        }
+
+        List<PackageAsset> GetAssets(MemoryStream stream)
+        {
+            var allRecords = new List<PackageAsset>();
 
             var config = new ChoETL.ChoCSVRecordConfiguration
             {
@@ -28,18 +31,14 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     HasHeaderRecord = false,
                 },
             };
+
             using (var reader = new StreamReader(stream))
-            using (var csvReader = new global::ChoETL.ChoCSVReader(reader, config).AsDataReader())
-            {
-                var count = 0;
-                while (csvReader.Read())
+                foreach (var record in new global::ChoETL.ChoCSVReader<PackageAssetData>(reader, config))
                 {
-                    count++;
-                    var record = activate();
-                    record.Read(i => csvReader.GetString(i));
-                    allRecords.Add(record);
+                    var asset = new PackageAsset();
+                    asset.Read(i => record.GetString(i));
+                    allRecords.Add(asset);
                 }
-            }
 
             return allRecords;
         }
