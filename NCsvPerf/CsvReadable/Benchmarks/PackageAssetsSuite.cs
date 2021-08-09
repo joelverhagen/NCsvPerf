@@ -200,10 +200,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             Execute(new NReco_Csv(ActivationMethod.ILEmit));
         }
 
-        //[Benchmark]
-        // this library currently fails correctness tests
-        // it seems to skip empty columns, and I see no way to
-        // access the column index.
+        [Benchmark]
         public void Open_Text_CSV()
         {
             Execute(new Open_Text_CSV(ActivationMethod.ILEmit));
