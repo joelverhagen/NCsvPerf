@@ -10,11 +10,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// I had to reference my own fork of this project because it did not support LF (Unix-style) line endings and did
     /// not seem to have an official distribution on NuGet.org.
     /// </summary>
-    public class CommonLibrary_Net : ICsvReader
+    public class CommonLibrary_NET : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public CommonLibrary_Net(ActivationMethod activationMethod)
+        public CommonLibrary_NET(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

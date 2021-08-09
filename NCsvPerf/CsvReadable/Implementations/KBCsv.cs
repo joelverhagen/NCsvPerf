@@ -9,11 +9,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/KBCsv/
     /// Source: https://github.com/kentcb/KBCsv
     /// </summary>
-    public class KB_Csv : ICsvReader
+    public class KBCsv : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public KB_Csv(ActivationMethod activationMethod)
+        public KBCsv(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

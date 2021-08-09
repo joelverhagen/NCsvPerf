@@ -7,11 +7,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/FluentCSV/
     /// Source: https://github.com/aboudoux/FluentCSV/
     /// </summary>
-    public class FluentCsv : ICsvReader
+    public class FluentCSV : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public FluentCsv(ActivationMethod activationMethod)
+        public FluentCSV(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

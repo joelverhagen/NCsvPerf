@@ -10,13 +10,13 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/Microsoft.Data.Analysis/
     /// Source: https://github.com/dotnet/MachineLearning
     /// </summary>
-    public class MicrosoftDataAnalysis : ICsvReader
+    public class Microsoft_Data_Analysis : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
         static Type[] types = Enumerable.Range(0, 25).Select(i => typeof(string)).ToArray();
 
-        public MicrosoftDataAnalysis(ActivationMethod activationMethod)
+        public Microsoft_Data_Analysis(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

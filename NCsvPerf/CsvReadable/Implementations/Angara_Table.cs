@@ -11,11 +11,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/Angara.Table
     /// Source: https://github.com/microsoft/Angara.Table
     /// </summary>
-    public class AngaraTable : ICsvReader
+    public class Angara_Table : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public AngaraTable(ActivationMethod activationMethod)
+        public Angara_Table(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

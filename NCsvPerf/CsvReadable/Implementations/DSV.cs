@@ -9,11 +9,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/Dsv
     /// Source: https://github.com/atifaziz/Dsv
     /// </summary>
-    public class DSV : ICsvReader
+    public class Dsv : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public DSV(ActivationMethod activationMethod)
+        public Dsv(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

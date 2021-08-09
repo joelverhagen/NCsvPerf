@@ -56,9 +56,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void AngaraTable()
+        public void Angara_Table()
         {
-            Execute(new AngaraTable(ActivationMethod.ILEmit));
+            Execute(new Angara_Table(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -68,15 +68,15 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void ChoEtl()
+        public void ChoETL()
         {
-            Execute(new ChoEtl(ActivationMethod.ILEmit));
+            Execute(new ChoETL(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
-        public void CommonLibrary_Net()
+        public void CommonLibrary_NET()
         {
-            Execute(new CommonLibrary_Net(ActivationMethod.ILEmit));
+            Execute(new CommonLibrary_NET(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -122,9 +122,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void DSV()
+        public void Dsv()
         {
-            Execute(new DSV(ActivationMethod.ILEmit));
+            Execute(new Dsv(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -146,9 +146,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void FluentCsv()
+        public void FluentCSV()
         {
-            Execute(new FluentCsv(ActivationMethod.ILEmit));
+            Execute(new FluentCSV(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -158,9 +158,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void KB_Csv()
+        public void KBCsv()
         {
-            Execute(new KB_Csv(ActivationMethod.ILEmit));
+            Execute(new KBCsv(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -182,15 +182,15 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void MicrosoftML()
+        public void Microsoft_ML()
         {
-            Execute(new MicrosoftML(ActivationMethod.ILEmit));
+            Execute(new Microsoft_ML(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
-        public void MicrosoftDataAnalysis()
+        public void Microsoft_Data_Analysis()
         {
-            Execute(new MicrosoftDataAnalysis(ActivationMethod.ILEmit));
+            Execute(new Microsoft_Data_Analysis(ActivationMethod.ILEmit));
         }
 
         [Benchmark]

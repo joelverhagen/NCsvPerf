@@ -11,11 +11,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/Microsoft.ML
     /// Source: https://github.com/dotnet/machinelearning
     /// </summary>
-    public class MicrosoftML : ICsvReader
+    public class Microsoft_ML : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
 
-        public MicrosoftML(ActivationMethod activationMethod)
+        public Microsoft_ML(ActivationMethod activationMethod)
         {
             _activationMethod = activationMethod;
         }

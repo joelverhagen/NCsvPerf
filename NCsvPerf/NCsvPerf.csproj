@@ -7,14 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cesil" Version="0.9.0" />
-    <PackageReference Include="FSharp.Core" Version="5.0.2" />
-    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
-
-
-    <PackageReference Include="Angara.Table" Version="0.3.3" />
+    <PackageReference Include="Angara.Table" Version="0.3.3" NoWarn="NU1701" />
+    <PackageReference Include="Angara.Serialization" Version="0.3.0" NoWarn="NU1701" />
+    <PackageReference Include="Angara.Statistics" Version="0.1.0" NoWarn="NU1701" />
     <PackageReference Include="Ben.StringIntern" Version="0.1.8" />
     <PackageReference Include="BenchmarkDotNet" Version="0.13.0" />
+    <PackageReference Include="Cesil" Version="0.9.0" />
     <PackageReference Include="ChoETL" Version="1.2.1.22" />
     <PackageReference Include="Csv" Version="2.0.62" />
     <PackageReference Include="CSVFile" Version="3.0.2" />
@@ -26,10 +24,11 @@
     <PackageReference Include="Dsv" Version="1.3.1" />
     <PackageReference Include="FileHelpers" Version="3.5.0" />
     <PackageReference Include="FlatFiles" Version="4.16.0" />
+    <PackageReference Include="FluentCSV" Version="3.0.0" />
+    <PackageReference Include="FSharp.Core" Version="5.0.2" />
     <PackageReference Include="KBCsv" Version="6.0.0" />
     <PackageReference Include="Knapcode.CommonLibrary.NET" Version="0.9.8.8-beta.3" NoWarn="NU1701" />
     <PackageReference Include="Knapcode.FastCsvParser" Version="1.1.0" />
-    <PackageReference Include="FluentCSV" Version="3.0.0" />
     <PackageReference Include="LinqToCsv" Version="1.5.0" NoWarn="NU1701" />
     <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
     <PackageReference Include="mgholam.fastCSV" Version="2.0.9" />
@@ -43,9 +42,9 @@
     <PackageReference Include="SoftCircuits.CsvParser" Version="3.0.0" />
     <PackageReference Include="Sylvan.Common" Version="0.2.1" />
     <PackageReference Include="Sylvan.Data.Csv" Version="1.1.5" />
+    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" NoWarn="NU1608" />
     <PackageReference Include="System.IO.Pipelines" Version="5.0.1" />
     <PackageReference Include="TinyCsvParser" Version="2.6.1" />
-
     <PackageReference Include="TxtCsvHelper" Version="1.3.1" />
   </ItemGroup>
 

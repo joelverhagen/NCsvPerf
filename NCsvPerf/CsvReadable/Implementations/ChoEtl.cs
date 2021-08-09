@@ -9,9 +9,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// Package: https://www.nuget.org/packages/ChoETL/
     /// Source: https://github.com/Cinchoo/ChoETL
     /// </summary>
-    public class ChoEtl : ICsvReader
+    public class ChoETL : ICsvReader
     {
-        public ChoEtl(ActivationMethod _)
+        public ChoETL(ActivationMethod _)
         {
         }
 
@@ -24,9 +24,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var allRecords = new List<PackageAsset>();
 
-            var config = new ChoETL.ChoCSVRecordConfiguration
+            var config = new global::ChoETL.ChoCSVRecordConfiguration
             {
-                FileHeaderConfiguration = new ChoETL.ChoCSVFileHeaderConfiguration
+                FileHeaderConfiguration = new global::ChoETL.ChoCSVFileHeaderConfiguration
                 {
                     HasHeaderRecord = false,
                 },
