@@ -56,9 +56,15 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void RecordParser()
+        public void AngaraTable()
         {
-            Execute(new RecordParser(ActivationMethod.ILEmit));
+            Execute(new AngaraTable(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void Cesil()
+        {
+            Execute(new Cesil(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -116,9 +122,21 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void DSV()
+        {
+            Execute(new DSV(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void FastCsvParser()
         {
             Execute(new FastCsvParser(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void FileHelpers()
+        {
+            Execute(new FileHelpers(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -140,6 +158,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void KB_Csv()
+        {
+            Execute(new KB_Csv(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void LinqToCsv()
         {
             Execute(new LinqToCsv(ActivationMethod.ILEmit));
@@ -158,6 +182,18 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void MicrosoftML()
+        {
+            Execute(new MicrosoftML(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void MicrosoftDataAnalysis()
+        {
+            Execute(new MicrosoftDataAnalysis(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void Microsoft_VisualBasic_FileIO_TextFieldParser()
         {
             Execute(new Microsoft_VisualBasic_FileIO_TextFieldParser(ActivationMethod.ILEmit));
@@ -167,6 +203,18 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void NReco_Csv()
         {
             Execute(new NReco_Csv(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void Open_Text_CSV()
+        {
+            Execute(new Open_Text_CSV(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void RecordParser()
+        {
+            Execute(new RecordParser(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
@@ -204,6 +252,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         {
             Execute(new TinyCsvParser(ActivationMethod.ILEmit));
         }
+
         [Benchmark]
         public void TxtCsvHelper()
         {
