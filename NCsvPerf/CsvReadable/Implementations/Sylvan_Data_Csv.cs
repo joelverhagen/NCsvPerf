@@ -26,7 +26,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                CsvDataReader csvReader;
                 var options = new CsvDataReaderOptions
                 {
                     HasHeaders = false,
@@ -34,16 +33,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     StringFactory = stringPool.GetString,
                 };
 
-                try
-                {
-                    // Throws if empty even when HasHeaders = false.
-                    csvReader = CsvDataReader.Create(reader, options);
-                }
-                catch (CsvMissingHeadersException)
-				{
-                    return allRecords;
-				}
-
+                var csvReader = CsvDataReader.Create(reader, options);
                 while (csvReader.Read())
                 {
                     var record = activate();

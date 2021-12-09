@@ -42,7 +42,7 @@
     <PackageReference Include="Sky.Data.Csv" Version="2.5.0" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="3.0.1" />
     <PackageReference Include="Sylvan.Common" Version="0.3.0" />
-    <PackageReference Include="Sylvan.Data.Csv" Version="1.1.9" />
+    <PackageReference Include="Sylvan.Data.Csv" Version="1.1.10" />
     <PackageReference Include="System.Collections.Immutable" Version="6.0.0" NoWarn="NU1608" />
     <PackageReference Include="System.IO.Pipelines" Version="6.0.0" />
     <PackageReference Include="TinyCsvParser" Version="2.6.1" />
