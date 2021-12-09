@@ -4,8 +4,10 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipelines;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
@@ -25,21 +27,52 @@ namespace Knapcode.NCsvPerf.CsvReadable
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var reader = BuildReader(activate);
+            var parallelism = 10;
+            var funcs = Enumerable.Range(0, parallelism)
+                .Select(_ =>
+                {
+                    var reader = BuildReader(activate);
 
-            string[] fields = null;
-            // closure over fields only allocated once
-            Func<int, string> getFields = i => fields[i];
+                    string[] fields = null;
+                    // closure over fields only allocated once
+                    Func<int, string> getFields = i => fields[i];
 
-            var result = ProcessStream<T>(stream, spanLine =>
+                    Func<Memory<char>, T> f = spanLine =>
+                    {
+                        fields = reader.Parse(spanLine.Span);
+
+                        var record = activate();
+
+                        record.Read(getFields);
+
+                        return record;
+                    };
+
+                    return (f, lockObj: new object());
+                })
+                .ToArray();
+
+            var items = ProcessStream(stream);
+            var result = new List<T>();
+            var locWrit = new object();
+
+            Parallel.ForEach(items, (item, _, i) =>
             {
-                fields = reader.Parse(spanLine);
+                var (f, locFunc) = funcs[i % parallelism];
+                var line = item.buffer.AsMemory().Slice(0, item.length);
+                T res;
 
-                var record = activate();
+                lock (locFunc)
+                {
+                    res = f(line);
+                }
 
-                record.Read(getFields);
+                ArrayPool<char>.Shared.Return(item.buffer);
 
-                return record;
+                lock (locWrit)
+                {
+                    result.Add(res);
+                }
             });
 
             return result;
@@ -69,10 +102,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             return reader;
         }
 
-        private static List<T> ProcessStream<T>(MemoryStream stream, FuncSpanT<T> parser)
+        private static IEnumerable<(char[] buffer, int length)> ProcessStream(MemoryStream stream)
         {
             var reader = PipeReader.Create(stream);
-            var records = new List<T>();
 
             while (true)
             {
@@ -80,9 +112,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 ReadOnlySequence<byte> buffer = read.Buffer;
                 while (TryReadLine(ref buffer, out ReadOnlySequence<byte> sequence))
                 {
-                    var item = ProcessSequence(sequence, parser);
+                    var array = ArrayPool<char>.Shared.Rent(500);
+                    var item = ProcessSequence(sequence, array);
 
-                    records.Add(item);
+                    yield return (array, item);
                 }
 
                 reader.AdvanceTo(buffer.Start, buffer.End);
@@ -91,8 +124,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     break;
                 }
             }
-
-            return records;
         }
 
         private static bool TryReadLine(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> line)
@@ -110,7 +141,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             return true;
         }
 
-        private static T ProcessSequence<T>(ReadOnlySequence<byte> sequence, FuncSpanT<T> parser)
+        private static int ProcessSequence(ReadOnlySequence<byte> sequence, char[] parser)
         {
             if (sequence.IsSingleSegment)
             {
@@ -126,12 +157,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
             return Parse(span, parser);
         }
 
-        private static T Parse<T>(ReadOnlySpan<byte> bytes, FuncSpanT<T> parser)
+        private static int Parse(ReadOnlySpan<byte> bytes, char[] chars)
         {
-            Span<char> chars = stackalloc char[bytes.Length];
             Encoding.UTF8.GetChars(bytes, chars);
 
-            return parser(chars);
+            return bytes.Length;
         }
     }
 }
