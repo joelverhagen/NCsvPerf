@@ -53,27 +53,25 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 .ToArray();
 
             var items = ProcessStream(stream);
-            var result = new List<T>();
-            var locWrit = new object();
 
-            Parallel.ForEach(items, (item, _, i) =>
-            {
-                var (f, locFunc) = funcs[i % parallelism];
-                var line = item.buffer.AsMemory().Slice(0, item.length);
-                T res;
-
-                lock (locFunc)
+            var result = items
+                .AsParallel()
+                .Select((item, i) =>
                 {
-                    res = f(line);
-                }
+                    var (f, locFunc) = funcs[i % parallelism];
+                    var line = item.buffer.AsMemory().Slice(0, item.length);
+                    T res;
 
-                ArrayPool<char>.Shared.Return(item.buffer);
+                    lock (locFunc)
+                    {
+                        res = f(line);
+                    }
 
-                lock (locWrit)
-                {
-                    result.Add(res);
-                }
-            });
+                    ArrayPool<char>.Shared.Return(item.buffer);
+
+                    return res;
+                })
+                .ToList();
 
             return result;
         }
