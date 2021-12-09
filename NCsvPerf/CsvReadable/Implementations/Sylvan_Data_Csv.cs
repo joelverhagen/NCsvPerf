@@ -33,7 +33,18 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     StringFactory = stringPool.GetString,
                 };
 
-                var csvReader = CsvDataReader.Create(reader, options);
+
+                CsvDataReader csvReader;
+                try
+                {
+                    // Throws if empty even when HasHeaders = false.
+                    csvReader = CsvDataReader.Create(reader, options);
+                }
+                catch (CsvMissingHeadersException)
+				{
+                    return allRecords;
+				}
+
                 while (csvReader.Read())
                 {
                     var record = activate();
