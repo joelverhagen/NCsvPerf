@@ -5,7 +5,7 @@ using BenchmarkDotNet.Attributes;
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
     [MemoryDiagnoser]
-    [SimpleJob(1, 2, 4, 1)]
+    [SimpleJob(1, 2, 6, 1)]
     public class PackageAssetsSuite
     {
         private byte[] _bytes;
