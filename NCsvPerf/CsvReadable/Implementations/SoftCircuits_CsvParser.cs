@@ -19,7 +19,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
         public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var allRecords = new List<T>();
 
             using (var reader = new SoftCircuits.CsvParser.CsvReader(stream))
             {
@@ -28,11 +27,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     var record = activate();
                     record.Read(i => columns[i]);
-                    allRecords.Add(record);
+                    yield return record;
                 }
             }
-
-            return allRecords;
         }
     }
 }

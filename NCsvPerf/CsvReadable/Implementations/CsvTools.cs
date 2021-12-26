@@ -21,7 +21,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
         public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var allRecords = new List<T>();
 
             if (stream.Length > 0)
             {
@@ -30,17 +29,15 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 // Read header as a row.
                 var r = activate();
                 r.Read(i => table.ColumnNames.ElementAt(i));
-                allRecords.Add(r);
+                yield return r;
 
                 foreach (var row in table.Rows)
                 {
                     var record = activate();
                     record.Read(i => row.Values[i]);
-                    allRecords.Add(record);
+                    yield return record;
                 }
             }
-
-            return allRecords;
         }
     }
 }

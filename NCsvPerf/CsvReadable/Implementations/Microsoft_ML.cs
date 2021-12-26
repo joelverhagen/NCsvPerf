@@ -35,7 +35,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
             }
 
             var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var allRecords = new List<T>();
             var mlc = new MLContext();
 
             using (var reader = new StreamReader(stream))
@@ -55,11 +54,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     var record = activate();
                     record.Read(i => { ReadOnlyMemory<char> s = null; getters[i](ref s); return s.ToString(); });
-                    allRecords.Add(record);
+                    yield return record;
                 }
             }
-
-            return allRecords;
         }
     }
 }
