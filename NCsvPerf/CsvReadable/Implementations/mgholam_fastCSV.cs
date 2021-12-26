@@ -9,7 +9,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class mgholam_fastCSV : ICsvReader
     {
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             using (var reader = new StreamReader(stream))
             {

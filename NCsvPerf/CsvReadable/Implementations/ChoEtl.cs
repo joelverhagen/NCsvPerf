@@ -15,7 +15,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             return GetAssets(stream) as List<T>;
         }

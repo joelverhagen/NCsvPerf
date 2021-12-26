@@ -22,7 +22,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             _activationMethod = activationMethod;
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var reader = BuildReader(activate);

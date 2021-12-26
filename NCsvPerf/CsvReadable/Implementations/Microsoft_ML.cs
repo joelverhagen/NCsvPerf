@@ -20,7 +20,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             _activationMethod = activationMethod;
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             // this library only allows loading from a file.
             // so write to a local file, use the length of the memory stream
