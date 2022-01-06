@@ -50,6 +50,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\submodules\ByteTerrace.Ouroboros.Core\Project\ByteTerrace.Ouroboros.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="TestData\PackageAssets.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

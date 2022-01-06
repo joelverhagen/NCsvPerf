@@ -1,0 +1,4 @@
+[submodule "submodules/ByteTerrace.Ouroboros.Core"]
+	path = submodules/ByteTerrace.Ouroboros.Core
+	url = https://github.com/ByteTerrace/ByteTerrace.Ouroboros.Core.git
+	branch = main

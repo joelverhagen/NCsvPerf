@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using BenchmarkDotNet.Attributes;
+using Knapcode.NCsvPerf.CsvReadable.Implementations;
 
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
@@ -59,6 +60,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void Angara_Table()
         {
             Execute(new Angara_Table(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void ByteTerrace_Ouroboros_Core()
+        {
+            Execute(new ByteTerrace_Ouroboros_Core(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
