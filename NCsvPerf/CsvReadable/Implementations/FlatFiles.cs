@@ -23,7 +23,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                var csvReader = new global::FlatFiles.SeparatedValueReader(reader);
+                var csvReader = new global::FlatFiles.DelimitedReader(reader);
 
                 while (csvReader.Read())
                 {
