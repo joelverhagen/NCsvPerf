@@ -230,6 +230,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void StackOverflowRegex()
+        {
+            Execute(new StackOverflowRegex(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void string_Split()
         {
             Execute(new string_Split(ActivationMethod.ILEmit));
