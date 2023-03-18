@@ -15,15 +15,13 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            return GetAssets(stream) as List<T>;
+            return GetAssets(stream) as IEnumerable<T>;
         }
 
-        List<PackageAsset> GetAssets(MemoryStream stream)
+        IEnumerable<PackageAsset> GetAssets(MemoryStream stream)
         {
-            var allRecords = new List<PackageAsset>();
-
             var config = new global::ChoETL.ChoCSVRecordConfiguration
             {
                 FileHeaderConfiguration = new global::ChoETL.ChoCSVFileHeaderConfiguration
@@ -37,10 +35,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     var asset = new PackageAsset();
                     asset.Read(i => record.GetString(i));
-                    allRecords.Add(asset);
+                    yield return asset;
                 }
-
-            return allRecords;
         }
     }
 }

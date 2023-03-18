@@ -18,29 +18,27 @@ namespace Knapcode.NCsvPerf.CsvReadable
             _activationMethod = activationMethod;
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             // specialize for T == PackageAsset
-            return GetAssets(stream) as List<T>;
+            return GetAssets(stream) as IEnumerable<T>;
         }
 
-        public List<PackageAsset> GetAssets(MemoryStream stream) {
-            var allRecords = new List<PackageAsset>();
+        public IEnumerable<PackageAsset> GetAssets(MemoryStream stream) {
             using (var reader = new StreamReader(stream))
             {
                 var config = Configuration.For<PackageAsset>();
                 var csv = config.CreateReader(reader);
                 foreach (var row in csv.EnumerateAll())
                 {
-                    allRecords.Add(row);
                     // for some reason this final field is null for certain records
                     // which was causing tests to fail
                     if (row.PlatformVersion == null)
                         row.PlatformVersion = "";
+
+                    yield return row;
                 }
             }
-
-            return allRecords;
         }
     }
 }

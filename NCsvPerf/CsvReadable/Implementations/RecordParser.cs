@@ -22,7 +22,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             _activationMethod = activationMethod;
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var reader = BuildReader(activate);
@@ -69,10 +69,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             return reader;
         }
 
-        private static List<T> ProcessStream<T>(MemoryStream stream, FuncSpanT<T> parser)
+        private static IEnumerable<T> ProcessStream<T>(MemoryStream stream, FuncSpanT<T> parser)
         {
             var reader = PipeReader.Create(stream);
-            var records = new List<T>();
 
             while (true)
             {
@@ -82,7 +81,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     var item = ProcessSequence(sequence, parser);
 
-                    records.Add(item);
+                    yield return item;
                 }
 
                 reader.AdvanceTo(buffer.Start, buffer.End);
@@ -91,8 +90,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     break;
                 }
             }
-
-            return records;
         }
 
         private static bool TryReadLine(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> line)

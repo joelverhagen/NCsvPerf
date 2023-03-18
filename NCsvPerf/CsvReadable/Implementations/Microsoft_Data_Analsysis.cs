@@ -21,10 +21,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             _activationMethod = activationMethod;
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var allRecords = new List<T>();
 
             // This only works for data with exactly 25 columns.
             // You must either provide the column types, or the types will be
@@ -38,17 +37,15 @@ namespace Knapcode.NCsvPerf.CsvReadable
             catch(FormatException e)
             {
                 if (e.Message == "Empty file")
-                    return allRecords;
+                    yield break;
                 throw;
             }
             foreach (var row in frame.Rows)
             {
                 var record = activate();
                 record.Read(i => row[i].ToString());
-                allRecords.Add(record);
+                yield return record;
             }
-
-            return allRecords;
         }
     }
 }

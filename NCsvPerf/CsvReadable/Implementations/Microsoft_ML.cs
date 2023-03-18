@@ -20,7 +20,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             _activationMethod = activationMethod;
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             // this library only allows loading from a file.
             // so write to a local file, use the length of the memory stream
@@ -35,7 +35,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
             }
 
             var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var allRecords = new List<T>();
             var mlc = new MLContext();
 
             using (var reader = new StreamReader(stream))
@@ -55,11 +54,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     var record = activate();
                     record.Read(i => { ReadOnlyMemory<char> s = null; getters[i](ref s); return s.ToString(); });
-                    allRecords.Add(record);
+                    yield return record;
                 }
             }
-
-            return allRecords;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             }
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
 
@@ -38,14 +38,12 @@ namespace Knapcode.NCsvPerf.CsvReadable
             {
                 var cols = new FSharpOption<FSharpFunc<Tuple<int, string>, FSharpOption<Type>>>(new Types());
                 var table = Table.Load(reader, new ReadSettings(Delimiter.Comma, false, false, FSharpOption<int>.None, cols));
-                var allRecords = new List<T>(table.RowsCount);
                 for (int r = 0; r < table.RowsCount; r++)
                 {
                     var item = activate();
                     item.Read(i => table[i].Rows.Item(r).AsString);
-                    allRecords.Add(item);
+                    yield return item;
                 }
-                return allRecords;
             }
         }
     }

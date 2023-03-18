@@ -21,10 +21,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             _activationMethod = activationMethod;
         }
 
-        public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
+        public IEnumerable<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
-            var allRecords = new List<T>();
 
             using (var parser = new global::FastCsvParser.CsvReader(stream, Encoding.UTF8))
             {
@@ -32,11 +31,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     var record = activate();
                     record.Read(i => parser.Current[i]);
-                    allRecords.Add(record);
+                    yield return record;
                 }
             }
-
-            return allRecords;
         }
     }
 }
