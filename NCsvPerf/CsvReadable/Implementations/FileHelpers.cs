@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileHelpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -46,33 +47,58 @@ namespace Knapcode.NCsvPerf.CsvReadable
         [global::FileHelpers.DelimitedRecord(",")]
         public class PackageAssetData
         {
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string ScanId { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string ScanTimestamp { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string Id { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string Version { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string Created { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string ResultType { get; set; }
 
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PatternSet { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertyAnyValue { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertyCodeLanguage { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertyTargetFrameworkMoniker { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertyLocale { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertyManagedAssembly { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertyMSBuild { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertyRuntimeIdentifier { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PropertySatelliteAssembly { get; set; }
 
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string Path { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string FileName { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string FileExtension { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]            
             public string TopLevelFolder { get; set; }
 
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string RoundTripTargetFrameworkMoniker { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string FrameworkName { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string FrameworkVersion { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string FrameworkProfile { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PlatformName { get; set; }
+            [FieldQuoted('"', QuoteMode.OptionalForBoth)]
             public string PlatformVersion { get; set; }
 
             public string GetString(int i)

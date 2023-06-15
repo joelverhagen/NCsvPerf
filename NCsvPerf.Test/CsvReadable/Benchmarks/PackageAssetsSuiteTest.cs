@@ -27,6 +27,9 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
                 .GetType()
                 .GetMethods()
                 .Where(x => x.GetCustomAttributes(typeof(BenchmarkAttribute), inherit: false).Any())
+                // the naive string.Split implementation is not expected
+                // to produce correct results.
+                .Where(m => m.Name != "string_Split")
                 .ToList();
             var results = new Dictionary<string, List<PackageAsset>>();
 

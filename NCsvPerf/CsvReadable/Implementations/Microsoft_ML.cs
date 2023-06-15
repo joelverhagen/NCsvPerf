@@ -46,7 +46,12 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     schema[i] = new TextLoader.Column("" + i, DataKind.String, i);
                 }
 
-                var opts = new TextLoader.Options() { HasHeader = false, Separators = new[] { ',' }, Columns = schema };
+                var opts = new TextLoader.Options() { 
+                    HasHeader = false, 
+                    Separators = new[] { ',' }, 
+                    Columns = schema,
+                    AllowQuoting = true,
+                };
                 var l = mlc.Data.LoadFromTextFile(file, opts);
                 var rc = l.GetRowCursor(l.Schema);
                 var cols = l.Schema.ToArray();
