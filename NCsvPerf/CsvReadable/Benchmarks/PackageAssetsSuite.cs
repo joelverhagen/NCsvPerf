@@ -11,6 +11,11 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         private byte[] _bytes;
         private readonly bool _saveResult;
 
+        // HACK: this is allows Microsoft.ML to participate.
+        // it can only read from a file (by name), so we use
+        // this id to cache a file to disk for that benchmark
+        public string fileId = null; 
+
         public PackageAssetsSuite() : this(saveResult: false)
         {
         }
@@ -34,7 +39,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         [GlobalSetup]
         public void GlobalSetup()
         {
-            _bytes = TestData.PackageAssets.GetBytes(LineCount);
+            SetData(TestData.PackageAssets.GetBytes(LineCount));
+        }
+
+        public void SetData(byte[] data)
+        {
+            _bytes = data;
         }
 
         private void Execute(ICsvReader reader)
@@ -43,7 +53,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
             {
                 var result = reader.GetRecords<PackageAsset>(memoryStream);
 
-                if (result.Count != LineCount)
+                if (LineCount != 0 && result.Count != LineCount)
                 {
                     throw new InvalidDataException($"ICsvReader '{reader.GetType().FullName}' failed to produce correct number of rows. Expected: {LineCount}, actual: {result.Count}.");
                 }
@@ -184,7 +194,8 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         [Benchmark]
         public void Microsoft_ML()
         {
-            Execute(new Microsoft_ML(ActivationMethod.ILEmit));
+            var id = this.fileId ?? LineCount.ToString();
+            Execute(new Microsoft_ML(ActivationMethod.ILEmit, id));
         }
 
         [Benchmark]
