@@ -47,8 +47,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             private readonly Activate<T> _activate;
 
-            private readonly MyStringPool _stringPool;
 
+#if ENABLE_STRING_POOLING
+            private readonly MyStringPool _stringPool;
+#endif
             private readonly byte[] _bytes = new byte[1024];
 
             private readonly List<string> _fields = new List<string>();
@@ -58,7 +60,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
             public Vis(ActivationMethod activationMethod)
             {
                 _activate = ActivatorFactory.Create<T>(activationMethod);
+
+#if ENABLE_STRING_POOLING
                 _stringPool = new MyStringPool();
+#endif
             }
 
             public List<T> Records { get; } = new List<T>();
@@ -72,7 +77,11 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     _bytesConsumed = 0;
                 }
 
+#if ENABLE_STRING_POOLING
                 _fields.Add(chunk.IsEmpty ? string.Empty : _stringPool.GetString(chunk));
+#else
+                _fields.Add(chunk.IsEmpty ? string.Empty : Encoding.UTF8.GetString(chunk));
+#endif
             }
 
             public override void VisitEndOfRecord()
@@ -92,7 +101,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             public void Dispose()
             {
+
+#if ENABLE_STRING_POOLING
                 _stringPool.Dispose();
+#endif
             }
         }
 
