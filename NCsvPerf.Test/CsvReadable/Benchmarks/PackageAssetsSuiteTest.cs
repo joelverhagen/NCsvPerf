@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -52,7 +53,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
                 number++;
                 _output.WriteLine($"Group #{number} (result JSON length = {group.Key.Length}):");
                 File.WriteAllText($"group-{number}.json", group.Key);
-                foreach (var benchmark in group)
+                foreach (var benchmark in group.Order(StringComparer.OrdinalIgnoreCase))
                 {
                     _output.WriteLine($"  - {benchmark}");
                 }

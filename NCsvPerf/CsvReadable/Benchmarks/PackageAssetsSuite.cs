@@ -152,6 +152,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void GenericParsing()
+        {
+            Execute(new GenericParsing(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void HomeGrown()
         {
             Execute(new HomeGrown(ActivationMethod.ILEmit));
