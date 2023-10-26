@@ -28,18 +28,28 @@ namespace Knapcode.NCsvPerf.CsvReadable
             {
                 FileHeaderConfiguration = new global::ChoETL.ChoCSVFileHeaderConfiguration
                 {
-                    HasHeaderRecord = false,
+                    HasHeaderRecord = false,                     
                 },
+                QuoteChar = '"',
+                QuoteEscapeChar = '\"',
+                EscapeQuoteAndDelimiter = true,
+                MayContainEOLInData = true,
+                
             };
 
             using (var reader = new StreamReader(stream))
-                foreach (var record in new global::ChoETL.ChoCSVReader<PackageAssetData>(reader, config))
+            {
+                var csvReader =
+                    new global::ChoETL.ChoCSVReader<PackageAssetData>(reader, config)
+                    .MayHaveQuotedFields(true, '\"');
+
+                foreach (var record in csvReader)
                 {
                     var asset = new PackageAsset();
                     asset.Read(i => record.GetString(i));
                     allRecords.Add(asset);
                 }
-
+            }
             return allRecords;
         }
     }
