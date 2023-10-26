@@ -1,13 +1,13 @@
-﻿using Ben.Collections.Specialized;
-using Knapcode.NCsvPerf.HomeGrown;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using Ben.Collections.Specialized;
+using Knapcode.NCsvPerf.HomeGrown;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
     /// <summary>
     /// Package: N/A
-    /// Source: see HomeGrownImproved.cs in this repository
+    /// Source: see HomeGrown2.cs in this repository
     /// </summary>
     public class HomeGrown2 : ICsvReader
     {
@@ -26,7 +26,13 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new StreamReader(stream))
             {
-                var parser = new HomeGrownImproved(buffer: new char[200], stringPool: new InternPool().Intern);
+#if ENABLE_STRING_POOLING
+                StringPool stringPool = new InternPool().Intern;
+#else
+                StringPool stringPool = s => new string(s);
+#endif
+
+                var parser = new NCsvPerf.HomeGrown.HomeGrown2(buffer: new char[200], stringPool);
 
                 while (parser.TryReadLine(reader, fields))
                 {

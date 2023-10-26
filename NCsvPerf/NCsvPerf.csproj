@@ -5,7 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Knapcode.NCsvPerf</RootNamespace>
     <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
-	<DefineConstants>ENABLE_STRING_POOLING</DefineConstants>
+    <DefineConstants>ENABLE_STRING_POOLING</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

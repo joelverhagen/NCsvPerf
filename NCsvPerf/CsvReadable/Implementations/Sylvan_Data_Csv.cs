@@ -22,7 +22,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
+#if ENABLE_STRING_POOLING
             var stringPool = new StringPool(128);
+#endif
 
             using (var reader = new StreamReader(stream))
             {
@@ -30,7 +32,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     HasHeaders = false,
                     BufferSize = 0x10000,
+#if ENABLE_STRING_POOLING
                     StringFactory = stringPool.GetString,
+#endif
                 };
 
                 var csvReader = CsvDataReader.Create(reader, options);

@@ -6,13 +6,13 @@ namespace Knapcode.NCsvPerf.HomeGrown
 {
     public delegate string StringPool(ReadOnlySpan<char> text);
 
-    public class HomeGrownImproved
+    public class HomeGrown2
     {
         private readonly char[] _buffer;
         private readonly StringPool _stringPool;
         private int _index;
 
-        public HomeGrownImproved(char[] buffer, StringPool stringPool)
+        public HomeGrown2(char[] buffer, StringPool stringPool)
         {
             _buffer = buffer;
             _stringPool = stringPool;

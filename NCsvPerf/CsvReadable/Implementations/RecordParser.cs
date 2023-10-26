@@ -1,8 +1,8 @@
-﻿using Ben.Collections.Specialized;
-using RecordParser.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Ben.Collections.Specialized;
+using RecordParser.Extensions;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
@@ -32,7 +32,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
                 ColumnCount = activate().GetColumnCount(),
                 Separator = ",",
+#if ENABLE_STRING_POOLING
                 StringPoolFactory = () => new InternPool().Intern,
+#endif
                 ParallelismOptions = new() 
                 { 
                     Enabled = true, 

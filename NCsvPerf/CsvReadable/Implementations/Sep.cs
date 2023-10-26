@@ -26,7 +26,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             using var reader = nietras.SeparatedValues.Sep.Reader(o => o with
             {
                 HasHeader = false,
+#if ENABLE_STRING_POOLING
                 CreateToString = SepToString.PoolPerCol(maximumStringLength: 128),
+#endif
             })
             .From(stream);
 
