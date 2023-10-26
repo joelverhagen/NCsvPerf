@@ -8,9 +8,9 @@ namespace Knapcode.NCsvPerf.HomeGrown
 
     public class HomeGrownImproved
     {
-        private char[] _buffer;
-        private StringPool _stringPool;
-        private int _i;
+        private readonly char[] _buffer;
+        private readonly StringPool _stringPool;
+        private int _index;
 
         public HomeGrownImproved(char[] buffer, StringPool stringPool)
         {
@@ -28,7 +28,7 @@ namespace Knapcode.NCsvPerf.HomeGrown
 
         public bool TryReadLine(TextReader reader, List<string> fields)
         {
-            _i = 0;
+            _index = 0;
             fields.Clear();
 
             var state = State.BeforeField;
@@ -59,7 +59,7 @@ namespace Knapcode.NCsvPerf.HomeGrown
                                 state = State.LineEnd;
                                 break;
                             default:
-                                _buffer[_i++] = (char)c;
+                                _buffer[_index++] = (char)c;
                                 state = State.InField;
                                 break;
                         }
@@ -85,7 +85,7 @@ namespace Knapcode.NCsvPerf.HomeGrown
                                 state = State.LineEnd;
                                 break;
                             default:
-                                _buffer[_i++] = (char)c;
+                                _buffer[_index++] = (char)c;
                                 break;
                         }
                         break;
@@ -98,7 +98,7 @@ namespace Knapcode.NCsvPerf.HomeGrown
                                 switch (nc)
                                 {
                                     case '"':
-                                        _buffer[_i++] = '"';
+                                        _buffer[_index++] = '"';
                                         reader.Read();
                                         break;
                                     case ',':
@@ -125,7 +125,7 @@ namespace Knapcode.NCsvPerf.HomeGrown
                                 }
                                 break;
                             default:
-                                _buffer[_i++] = (char)c;
+                                _buffer[_index++] = (char)c;
                                 break;
                         }
                         break;
@@ -143,7 +143,7 @@ namespace Knapcode.NCsvPerf.HomeGrown
             switch (state)
             {
                 case State.InField:
-                    var span = _buffer.AsSpan(0, _i);
+                    var span = _buffer.AsSpan(0, _index);
                     var text = _stringPool != null
                         ? _stringPool(span)
                         : span.ToString();
@@ -159,19 +159,19 @@ namespace Knapcode.NCsvPerf.HomeGrown
 
         private void AddField(List<string> fields)
         {
-            if (_i == 0)
+            if (_index == 0)
             {
                 fields.Add(string.Empty);
             }
             else
             {
-                var span = _buffer.AsSpan(0, _i);
+                var span = _buffer.AsSpan(0, _index);
                 var text = _stringPool != null
                     ? _stringPool(span)
                     : span.ToString();
 
                 fields.Add(text);
-                _i = 0;
+                _index = 0;
             }
         }
     }

@@ -158,6 +158,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void HomeGrownImproved()
+        {
+            Execute(new HomeGrown2(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void KBCsv()
         {
             Execute(new KBCsv(ActivationMethod.ILEmit));

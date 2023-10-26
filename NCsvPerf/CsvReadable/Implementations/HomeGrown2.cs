@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using Ben.Collections.Specialized;
+﻿using Ben.Collections.Specialized;
 using Knapcode.NCsvPerf.HomeGrown;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
 {
@@ -24,11 +23,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
             var fields = new List<string>();
-            var builder = new StringBuilder();
 
             using (var reader = new StreamReader(stream))
             {
-                var parser = new HomeGrownImproved(new char[200], new InternPool().Intern);
+                var parser = new HomeGrownImproved(buffer: new char[200], stringPool: new InternPool().Intern);
 
                 while (parser.TryReadLine(reader, fields))
                 {
