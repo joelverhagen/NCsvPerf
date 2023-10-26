@@ -1,6 +1,8 @@
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
 using Xunit;
@@ -22,22 +24,22 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void AllBenchmarksHaveSameOutput(int lineCount)
         {
             // Arrange
-            var suite = new PackageAssetsSuite(saveResult: true);
-            var benchmarks = suite
+            var benchmarks = new PackageAssetsSuite()
                 .GetType()
                 .GetMethods()
                 .Where(x => x.GetCustomAttributes(typeof(BenchmarkAttribute), inherit: false).Any())
                 .ToList();
-            var results = new Dictionary<string, List<PackageAsset>>();
+            var results = new ConcurrentDictionary<string, List<PackageAsset>>();
 
             // Act
-            foreach (var benchmark in benchmarks)
+            Parallel.ForEach(benchmarks, benchmark =>
             {
+                var suite = new PackageAssetsSuite(saveResult: true);
                 suite.LineCount = lineCount;
                 suite.GlobalSetup();
                 benchmark.Invoke(suite, null);
-                results.Add(benchmark.Name, suite.LatestResult);
-            }
+                results.TryAdd(benchmark.Name, suite.LatestResult);
+            });
 
             // Assert
             var groups = results
@@ -67,6 +69,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
                 yield return new object[] { 1 };
                 yield return new object[] { 100 };
                 yield return new object[] { 10_000 };
+                yield return new object[] { 100_000 };
             }
         }
     }
