@@ -23,11 +23,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             using (var reader = new SoftCircuits.CsvParser.CsvReader(stream))
             {
-                string[] columns = null;
-                while (reader.ReadRow(ref columns))
+                while (reader.Read())
                 {
                     var record = activate();
-                    record.Read(i => columns[i]);
+                    record.Read(i => reader.Columns[i]);
                     allRecords.Add(record);
                 }
             }
