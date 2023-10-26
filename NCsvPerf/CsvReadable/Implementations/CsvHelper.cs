@@ -26,7 +26,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
             {
                 var config = new global::CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
                 {
+#if ENABLE_STRING_POOLING
                     CacheFields = true,
+#endif
                 };
                 var csvParser = new global::CsvHelper.CsvParser(reader, config);
                 while (csvParser.Read())

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Sylvan;
 using KBCsv;
 
 namespace Knapcode.NCsvPerf.CsvReadable
@@ -22,7 +21,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
-            var stringPool = new StringPool(128);
 
             using (var reader = new StreamReader(stream))
             using (var csvReader = new CsvReader(reader))
