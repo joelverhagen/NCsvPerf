@@ -1,7 +1,6 @@
 ﻿using Cesil;
 using Knapcode.NCsvPerf.CsvReadable.TestCases;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable

@@ -5,7 +5,7 @@ using BenchmarkDotNet.Attributes;
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
     [MemoryDiagnoser]
-    [SimpleJob(1, 2, 4, 1)]
+    [SimpleJob(1, 2, 6, 1)]
     public class PackageAssetsSuite
     {
         private byte[] _bytes;
@@ -227,6 +227,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         public void Sky_Data_Csv()
         {
             Execute(new Sky_Data_Csv(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
+        public void StackOverflowRegex()
+        {
+            Execute(new StackOverflowRegex(ActivationMethod.ILEmit));
         }
 
         [Benchmark]
