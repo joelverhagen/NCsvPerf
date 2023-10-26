@@ -5,6 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Knapcode.NCsvPerf</RootNamespace>
     <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+	<DefineConstants>ENABLE_STRING_POOLING</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <PackageReference Include="NReco.Csv" Version="1.0.1" />
     <PackageReference Include="Open.Text.CSV" Version="3.3.0" />
     <PackageReference Include="RecordParser" Version="2.1.0" />
+    <PackageReference Include="Sep" Version="0.1.0" />
     <PackageReference Include="ServiceStack.Text" Version="6.7.0" />
     <PackageReference Include="Sky.Data.Csv" Version="2.5.0" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="4.0.0" />
