@@ -218,6 +218,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Sep()
+        {
+            Execute(new Sep(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void ServiceStack_Text()
         {
             Execute(new ServiceStack_Text(ActivationMethod.ILEmit));
