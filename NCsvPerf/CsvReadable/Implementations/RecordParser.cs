@@ -13,10 +13,16 @@ namespace Knapcode.NCsvPerf.CsvReadable
     public class RecordParser : ICsvReader
     {
         private readonly ActivationMethod _activationMethod;
+        private readonly bool _parallel;
 
-        public RecordParser(ActivationMethod activationMethod)
+        public RecordParser(ActivationMethod activationMethod) : this(activationMethod, parallel: false)
+        {
+        }
+
+        public RecordParser(ActivationMethod activationMethod, bool parallel)
         {
             _activationMethod = activationMethod;
+            _parallel = parallel;
         }
 
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
@@ -35,10 +41,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
 #if ENABLE_STRING_POOLING
                 StringPoolFactory = () => new InternPool().Intern,
 #endif
-                ParallelismOptions = new() 
-                { 
-                    Enabled = true, 
-                    EnsureOriginalOrdering = false 
+                ParallelismOptions = new()
+                {
+                    Enabled = _parallel,
                 },
             };
 
