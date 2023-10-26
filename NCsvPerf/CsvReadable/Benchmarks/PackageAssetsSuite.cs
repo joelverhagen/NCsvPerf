@@ -158,7 +158,7 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
-        public void HomeGrownImproved()
+        public void HomeGrown2()
         {
             Execute(new HomeGrown2(ActivationMethod.ILEmit));
         }
