@@ -230,6 +230,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void RecordParserParallel()
+        {
+            Execute(new RecordParserParallel(ActivationMethod.ILEmit));
+        }
+
+        [Benchmark]
         public void Sep()
         {
             Execute(new Sep(ActivationMethod.ILEmit));
