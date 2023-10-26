@@ -1,5 +1,5 @@
 ﻿using Ben.Collections.Specialized;
-using RecordParser.Extensions.FileReader;
+using RecordParser.Extensions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

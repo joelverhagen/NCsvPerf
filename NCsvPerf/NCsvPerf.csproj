@@ -36,7 +36,7 @@
     <PackageReference Include="Microsoft.ML" Version="1.6.0" />
     <PackageReference Include="NReco.Csv" Version="1.0.0" />
     <PackageReference Include="Open.Text.CSV" Version="2.3.3" />
-    <PackageReference Include="RecordParser" Version="2.0.0" />
+    <PackageReference Include="RecordParser" Version="2.1.0" />
     <PackageReference Include="ServiceStack.Text" Version="5.11.0" />
     <PackageReference Include="Sky.Data.Csv" Version="2.5.0" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="3.0.0" />
