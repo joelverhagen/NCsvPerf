@@ -4,9 +4,9 @@
     /// Package: https://www.nuget.org/packages/recordparser
     /// Source: https://github.com/leandromoh/RecordParser
     /// </summary>
-    public class RecordParserParallel : RecordParser
+    public class RecordParserParallelUnordered : RecordParser
     {
-        public RecordParserParallel(ActivationMethod activationMethod) : base(activationMethod, parallel: true, ensureOriginalOrdering: true)
+        public RecordParserParallelUnordered(ActivationMethod activationMethod) : base(activationMethod, parallel: true, ensureOriginalOrdering: false)
         {
         }
     }

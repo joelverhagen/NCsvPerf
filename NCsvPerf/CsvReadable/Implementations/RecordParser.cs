@@ -14,15 +14,17 @@ namespace Knapcode.NCsvPerf.CsvReadable
     {
         private readonly ActivationMethod _activationMethod;
         private readonly bool _parallel;
+        private readonly bool _ensureOriginalOrdering;
 
-        public RecordParser(ActivationMethod activationMethod) : this(activationMethod, parallel: false)
+        public RecordParser(ActivationMethod activationMethod) : this(activationMethod, parallel: false, ensureOriginalOrdering: true)
         {
         }
 
-        public RecordParser(ActivationMethod activationMethod, bool parallel)
+        public RecordParser(ActivationMethod activationMethod, bool parallel, bool ensureOriginalOrdering)
         {
             _activationMethod = activationMethod;
             _parallel = parallel;
+            _ensureOriginalOrdering = ensureOriginalOrdering;
         }
 
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
@@ -44,6 +46,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 ParallelismOptions = new()
                 {
                     Enabled = _parallel,
+                    EnsureOriginalOrdering = _ensureOriginalOrdering,
                 },
             };
 
