@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Knapcode.NCsvPerf.CsvReadable.TestCases
+namespace Knapcode.NCsvPerf.CsvReadable.TestCases;
 {
     public class PackageAsset : ICsvReadable
     {

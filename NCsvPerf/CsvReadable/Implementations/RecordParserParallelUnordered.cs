@@ -6,7 +6,7 @@
     /// </summary>
     public class RecordParserParallelUnordered : RecordParser
     {
-        public RecordParserParallelUnordered(ActivationMethod activationMethod) : base(activationMethod, parallel: true, ensureOriginalOrdering: false)
+        public RecordParserParallelUnordered() : base(parallel: true, ensureOriginalOrdering: false)
         {
         }
     }

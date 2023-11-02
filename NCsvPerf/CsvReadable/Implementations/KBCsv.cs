@@ -10,16 +10,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class KBCsv : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public KBCsv(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -29,7 +21,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 {
                     var row = csvReader.ReadDataRecord();
 
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => row[i]);
                     allRecords.Add(record);
                 }

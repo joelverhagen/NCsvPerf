@@ -12,24 +12,21 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class RecordParser : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
         private readonly bool _parallel;
         private readonly bool _ensureOriginalOrdering;
 
-        public RecordParser(ActivationMethod activationMethod) : this(activationMethod, parallel: false, ensureOriginalOrdering: true)
+        public RecordParser() : this(parallel: false, ensureOriginalOrdering: true)
         {
         }
 
-        public RecordParser(ActivationMethod activationMethod, bool parallel, bool ensureOriginalOrdering)
+        public RecordParser(bool parallel, bool ensureOriginalOrdering)
         {
-            _activationMethod = activationMethod;
             _parallel = parallel;
             _ensureOriginalOrdering = ensureOriginalOrdering;
         }
 
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             using var streamReader = new StreamReader(stream);
 
             var options = new VariableLengthReaderRawOptions
@@ -38,7 +35,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 ContainsQuotedFields = false,
                 Trim = false,
 
-                ColumnCount = activate().GetColumnCount(),
+                ColumnCount = new T().GetColumnCount(),
                 Separator = ",",
 #if ENABLE_STRING_POOLING
                 StringPoolFactory = () => new InternPool().Intern,
@@ -52,7 +49,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             var items = streamReader.ReadRecordsRaw(options, getField =>
             {
-                var record = activate();
+                var record = new T();
                 record.Read(getField);
                 return record;
             });

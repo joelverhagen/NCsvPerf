@@ -11,16 +11,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class HomeGrown : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public HomeGrown(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
             var fields = new List<string>();
             var builder = new StringBuilder();
@@ -29,7 +21,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             {
                 while (CsvUtility.TryReadLine(reader, fields, builder))
                 {
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => fields[i]);
                     allRecords.Add(record);
                 }

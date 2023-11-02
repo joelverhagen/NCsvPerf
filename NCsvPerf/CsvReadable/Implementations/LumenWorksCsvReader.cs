@@ -9,16 +9,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class LumenWorksCsvReader : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public LumenWorksCsvReader(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -26,7 +18,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             {
                 while (csvReader.ReadNextRecord())
                 {
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => csvReader[i]);
                     allRecords.Add(record);
                 }

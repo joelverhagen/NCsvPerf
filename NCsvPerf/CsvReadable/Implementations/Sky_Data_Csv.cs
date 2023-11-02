@@ -9,22 +9,14 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class Sky_Data_Csv : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public Sky_Data_Csv(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             var csvReader = Sky.Data.Csv.CsvReader.Create(stream);
             foreach (var row in csvReader)
             {
-                var record = activate();
+                var record = new T();
                 record.Read(i => row[i]);
                 allRecords.Add(record);
             }

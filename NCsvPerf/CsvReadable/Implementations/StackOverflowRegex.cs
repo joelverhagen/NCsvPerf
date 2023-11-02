@@ -16,16 +16,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
             @"(?<=\r|\n|^)(?!\r|\n|$)(?:(?:""(?<Value>(?:[^""]|"""")*)""|(?<Value>(?!"")[^,\r\n]+)|""(?<OpenValue>(?:[^""]|"""")*)(?=\r|\n|$)|(?<Value>))(?:,|(?=\r|\n|$)))+?(?:(?<=,)(?<Value>))?(?:\r\n|\r|\n|$)",
             RegexOptions.Compiled);
 
-        private readonly ActivationMethod _activationMethod;
-
-        public StackOverflowRegex(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
             var fields = new List<string>();
             var builder = new StringBuilder();
@@ -78,7 +70,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                             throw new InvalidDataException("R" + RecordNum + ":ERROR - Open ended quoted value: " + Record.Groups["OpenValue"].Captures[0].Value);
                         }
 
-                        var record = activate();
+                        var record = new T();
                         record.Read(i => fields[i]);
                         fields.Clear();
                         allRecords.Add(record);

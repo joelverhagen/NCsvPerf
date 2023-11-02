@@ -9,16 +9,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class ServiceStack_Text : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public ServiceStack_Text(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -26,7 +18,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var record = activate();
+                    var record = new T();
                     var fields = ServiceStack.Text.CsvReader.ParseFields(line);
                     // Empty fields are returned as null by this library. Convert that to empty string to be more
                     // consistent with other libraries.

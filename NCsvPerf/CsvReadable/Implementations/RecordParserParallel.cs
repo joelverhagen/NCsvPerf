@@ -6,7 +6,7 @@
     /// </summary>
     public class RecordParserParallel : RecordParser
     {
-        public RecordParserParallel(ActivationMethod activationMethod) : base(activationMethod, parallel: true, ensureOriginalOrdering: true)
+        public RecordParserParallel() : base(parallel: true, ensureOriginalOrdering: true)
         {
         }
     }

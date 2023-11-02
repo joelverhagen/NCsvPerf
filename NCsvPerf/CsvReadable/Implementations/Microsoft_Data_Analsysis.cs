@@ -12,18 +12,10 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class Microsoft_Data_Analysis : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
         static Type[] types = Enumerable.Range(0, 25).Select(i => typeof(string)).ToArray();
-
-        public Microsoft_Data_Analysis(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
 
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             // This only works for data with exactly 25 columns.
@@ -43,7 +35,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             }
             foreach (var row in frame.Rows)
             {
-                var record = activate();
+                var record = new T();
                 record.Read(i => row[i].ToString());
                 allRecords.Add(record);
             }

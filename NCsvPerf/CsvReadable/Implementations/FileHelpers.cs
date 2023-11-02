@@ -10,16 +10,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class FileHelpers : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public FileHelpers(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -34,7 +26,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                         // and then subsequently copy all the fields to a PackageAsset
                         // but this approach is actually faster than having FileHelpers
                         // bind directly to the PackageAsset.
-                        var record = activate();
+                        var record = new T();
                         record.Read(i => item.GetString(i));
                         allRecords.Add(record);
                     }

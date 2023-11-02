@@ -11,13 +11,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class Cesil : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public Cesil(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             // specialize for T == PackageAsset

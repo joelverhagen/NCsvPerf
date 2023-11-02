@@ -11,16 +11,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class Sep : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public Sep(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using var reader = nietras.SeparatedValues.Sep.Reader(o => o with
@@ -37,7 +29,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
             Func<int, string> toString = reader.ToString;
             foreach (var row in reader)
             {
-                var record = activate();
+                var record = new T();
                 record.Read(toString);
                 allRecords.Add(record);
             }

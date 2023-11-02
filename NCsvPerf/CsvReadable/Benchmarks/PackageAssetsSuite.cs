@@ -4,6 +4,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
+
     [MemoryDiagnoser]
     [SimpleJob(1, 2, 6, 1)]
     public class PackageAssetsSuite
@@ -27,8 +28,8 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 
         public static IReadOnlyList<int> LineCountSource { get; } =
             new[] { 
-                //0, 1, 10, 100, 1_000, 10_000, 100_000, 
-                1_000_000
+            //0, 1, 10, 100, 1_000, 10_000, 100_000, 
+            1_000_000
             };
 
         [GlobalSetup]
@@ -58,133 +59,133 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         [Benchmark]
         public void Angara_Table()
         {
-            Execute(new Angara_Table(ActivationMethod.ILEmit));
+            Execute(new Angara_Table());
         }
 
         [Benchmark]
         public void Cesil()
         {
-            Execute(new Cesil(ActivationMethod.ILEmit));
+            Execute(new Cesil());
         }
 
         [Benchmark]
         public void ChoETL()
         {
-            Execute(new ChoETL(ActivationMethod.ILEmit));
+            Execute(new ChoETL());
         }
 
         [Benchmark]
         public void CommonLibrary_NET()
         {
-            Execute(new CommonLibrary_NET(ActivationMethod.ILEmit));
+            Execute(new CommonLibrary_NET());
         }
 
         [Benchmark]
         public void Csv()
         {
-            Execute(new Csv(ActivationMethod.ILEmit));
+            Execute(new Csv());
         }
 
         [Benchmark]
         public void CSVFile()
         {
-            Execute(new CSVFile(ActivationMethod.ILEmit));
+            Execute(new CSVFile());
         }
 
         [Benchmark]
         public void CsvHelper()
         {
-            Execute(new CsvHelper(ActivationMethod.ILEmit));
+            Execute(new CsvHelper());
         }
 
         [Benchmark]
         public void CsvTextFieldParser()
         {
-            Execute(new CsvTextFieldParser(ActivationMethod.ILEmit));
+            Execute(new CsvTextFieldParser());
         }
 
         [Benchmark]
         public void CsvTools()
         {
-            Execute(new CsvTools(ActivationMethod.ILEmit));
+            Execute(new CsvTools());
         }
 
         [Benchmark]
         public void Ctl_Data()
         {
-            Execute(new Ctl_Data(ActivationMethod.ILEmit));
+            Execute(new Ctl_Data());
         }
 
         [Benchmark]
         public void Cursively()
         {
-            Execute(new Cursively(ActivationMethod.ILEmit));
+            Execute(new Cursively());
         }
 
         [Benchmark]
         public void Dsv()
         {
-            Execute(new Dsv(ActivationMethod.ILEmit));
+            Execute(new Dsv());
         }
 
         [Benchmark]
         public void FastCsvParser()
         {
-            Execute(new FastCsvParser(ActivationMethod.ILEmit));
+            Execute(new FastCsvParser());
         }
 
         [Benchmark]
         public void FileHelpers()
         {
-            Execute(new FileHelpers(ActivationMethod.ILEmit));
+            Execute(new FileHelpers());
         }
 
         [Benchmark]
         public void FlatFiles()
         {
-            Execute(new FlatFiles(ActivationMethod.ILEmit));
+            Execute(new FlatFiles());
         }
 
         [Benchmark]
         public void FluentCSV()
         {
-            Execute(new FluentCSV(ActivationMethod.ILEmit));
+            Execute(new FluentCSV());
         }
 
         [Benchmark]
         public void GenericParsing()
         {
-            Execute(new GenericParsing(ActivationMethod.ILEmit));
+            Execute(new GenericParsing());
         }
 
         [Benchmark]
         public void HomeGrown()
         {
-            Execute(new HomeGrown(ActivationMethod.ILEmit));
+            Execute(new HomeGrown());
         }
 
         [Benchmark]
         public void HomeGrown2()
         {
-            Execute(new HomeGrown2(ActivationMethod.ILEmit));
+            Execute(new HomeGrown2());
         }
 
         [Benchmark]
         public void KBCsv()
         {
-            Execute(new KBCsv(ActivationMethod.ILEmit));
+            Execute(new KBCsv());
         }
 
         [Benchmark]
         public void LinqToCsv()
         {
-            Execute(new LinqToCsv(ActivationMethod.ILEmit));
+            Execute(new LinqToCsv());
         }
 
         [Benchmark]
         public void LumenWorksCsvReader()
         {
-            Execute(new LumenWorksCsvReader(ActivationMethod.ILEmit));
+            Execute(new LumenWorksCsvReader());
         }
 
         [Benchmark]
@@ -196,97 +197,97 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         [Benchmark]
         public void Microsoft_ML()
         {
-            Execute(new Microsoft_ML(ActivationMethod.ILEmit));
+            Execute(new Microsoft_ML());
         }
 
         [Benchmark]
         public void Microsoft_Data_Analysis()
         {
-            Execute(new Microsoft_Data_Analysis(ActivationMethod.ILEmit));
+            Execute(new Microsoft_Data_Analysis());
         }
 
         [Benchmark]
         public void Microsoft_VisualBasic_FileIO_TextFieldParser()
         {
-            Execute(new Microsoft_VisualBasic_FileIO_TextFieldParser(ActivationMethod.ILEmit));
+            Execute(new Microsoft_VisualBasic_FileIO_TextFieldParser());
         }
 
         [Benchmark]
         public void NReco_Csv()
         {
-            Execute(new NReco_Csv(ActivationMethod.ILEmit));
+            Execute(new NReco_Csv());
         }
 
         [Benchmark]
         public void Open_Text_CSV()
         {
-            Execute(new Open_Text_CSV(ActivationMethod.ILEmit));
+            Execute(new Open_Text_CSV());
         }
 
         [Benchmark]
         public void RecordParser()
         {
-            Execute(new RecordParser(ActivationMethod.ILEmit));
+            Execute(new RecordParser());
         }
 
         [Benchmark]
         public void RecordParserParallel()
         {
-            Execute(new RecordParserParallel(ActivationMethod.ILEmit));
+            Execute(new RecordParserParallel());
         }
 
         [Benchmark]
         public void Sep()
         {
-            Execute(new Sep(ActivationMethod.ILEmit));
+            Execute(new Sep());
         }
 
         [Benchmark]
         public void ServiceStack_Text()
         {
-            Execute(new ServiceStack_Text(ActivationMethod.ILEmit));
+            Execute(new ServiceStack_Text());
         }
 
         [Benchmark]
         public void Sky_Data_Csv()
         {
-            Execute(new Sky_Data_Csv(ActivationMethod.ILEmit));
+            Execute(new Sky_Data_Csv());
         }
 
         [Benchmark]
         public void StackOverflowRegex()
         {
-            Execute(new StackOverflowRegex(ActivationMethod.ILEmit));
+            Execute(new StackOverflowRegex());
         }
 
         [Benchmark]
         public void string_Split()
         {
-            Execute(new string_Split(ActivationMethod.ILEmit));
+            Execute(new string_Split());
         }
 
         [Benchmark]
         public void SoftCircuits_CsvParser()
         {
-            Execute(new SoftCircuits_CsvParser(ActivationMethod.ILEmit));
+            Execute(new SoftCircuits_CsvParser());
         }
 
         [Benchmark]
         public void Sylvan_Data_Csv()
         {
-            Execute(new Sylvan_Data_Csv(ActivationMethod.ILEmit));
+            Execute(new Sylvan_Data_Csv());
         }
 
         [Benchmark]
         public void TinyCsvReader()
         {
-            Execute(new TinyCsvParser(ActivationMethod.ILEmit));
+            Execute(new TinyCsvParser());
         }
 
         [Benchmark]
         public void TxtCsvHelper()
         {
-            Execute(new TxtCsvHelper(ActivationMethod.ILEmit));
+            Execute(new TxtCsvHelper());
         }
     }
 }

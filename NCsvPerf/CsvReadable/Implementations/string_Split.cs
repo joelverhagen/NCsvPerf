@@ -9,16 +9,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class string_Split : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public string_Split(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -27,7 +19,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 while ((line = reader.ReadLine()) != null)
                 {
                     var pieces = line.Split(',');
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => pieces[i]);
                     allRecords.Add(record);
                 }

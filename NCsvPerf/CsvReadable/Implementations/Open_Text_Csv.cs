@@ -10,16 +10,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class Open_Text_CSV : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public Open_Text_CSV(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
             using (var reader = new StreamReader(stream))
             {
@@ -28,7 +20,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 IEnumerable<string> fields;
                 while ((fields = csvReader.ReadNextRow()) != null)
                 {
-                    var record = activate();
+                    var record = new T();
                     var enu = fields.GetEnumerator();
                     record.Read(i => { enu.MoveNext(); return enu.Current; });
                     allRecords.Add(record);
