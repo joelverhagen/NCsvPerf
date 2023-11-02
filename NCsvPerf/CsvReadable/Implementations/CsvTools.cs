@@ -11,16 +11,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class CsvTools : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public CsvTools(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             if (stream.Length > 0)
@@ -28,13 +20,13 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 var table = DataTable.New.ReadLazy(stream);
 
                 // Read header as a row.
-                var r = activate();
+                var r = new T();
                 r.Read(i => table.ColumnNames.ElementAt(i));
                 allRecords.Add(r);
 
                 foreach (var row in table.Rows)
                 {
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => row.Values[i]);
                     allRecords.Add(record);
                 }

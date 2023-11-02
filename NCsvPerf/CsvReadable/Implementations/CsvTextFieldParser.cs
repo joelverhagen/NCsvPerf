@@ -9,16 +9,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class CsvTextFieldParser : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public CsvTextFieldParser(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -27,7 +19,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 while (!parser.EndOfData)
                 {
                     var fields = parser.ReadFields();
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => fields[i]);
                     allRecords.Add(record);
                 }

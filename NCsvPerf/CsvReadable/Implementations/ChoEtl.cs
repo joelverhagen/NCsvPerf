@@ -11,10 +11,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class ChoETL : ICsvReader
     {
-        public ChoETL(ActivationMethod _)
-        {
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             return GetAssets(stream) as List<T>;

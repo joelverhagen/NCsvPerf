@@ -9,16 +9,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class FlatFiles : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public FlatFiles(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             using (var reader = new StreamReader(stream))
@@ -28,7 +20,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 while (csvReader.Read())
                 {
                     var values = csvReader.GetValues();
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => values[i]?.ToString() ?? string.Empty);
                     allRecords.Add(record);
                 }

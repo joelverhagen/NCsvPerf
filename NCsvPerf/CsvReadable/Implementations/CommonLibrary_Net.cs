@@ -12,16 +12,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class CommonLibrary_NET : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public CommonLibrary_NET(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
 
             string text;
@@ -35,7 +27,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 var doc = ComLib.CsvParse.Csv.LoadText(text, false);
                 foreach (var row in doc.Parse())
                 {
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => row[i]);
                     allRecords.Add(record);
                 }

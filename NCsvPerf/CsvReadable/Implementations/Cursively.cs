@@ -20,16 +20,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public sealed class Cursively : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public Cursively(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            using var vis = new Vis<T>(_activationMethod);
+            using var vis = new Vis<T>();
             if (stream.TryGetBuffer(out var buf))
             {
                 CsvSyncInput.ForMemory(buf).Process(vis);
@@ -45,9 +38,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
         private sealed class Vis<T> : CsvReaderVisitorBase, IDisposable
             where T : ICsvReadable, new()
         {
-            private readonly Activate<T> _activate;
-
-
 #if ENABLE_STRING_POOLING
             private readonly MyStringPool _stringPool;
 #endif
@@ -57,10 +47,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             private int _bytesConsumed;
 
-            public Vis(ActivationMethod activationMethod)
+            public Vis()
             {
-                _activate = ActivatorFactory.Create<T>(activationMethod);
-
 #if ENABLE_STRING_POOLING
                 _stringPool = new MyStringPool();
 #endif
@@ -86,7 +74,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
             public override void VisitEndOfRecord()
             {
-                var record = _activate();
+                var record = new T();
                 var fields = _fields;
                 record.Read(i => fields[i]);
                 fields.Clear();

@@ -13,13 +13,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class Microsoft_ML : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public Microsoft_ML(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
             // this library only allows loading from a file.
@@ -34,7 +27,6 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 stream.CopyTo(data);
             }
 
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
             var mlc = new MLContext();
 
@@ -53,7 +45,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 var getters = cols.Select(c => rc.GetGetter<ReadOnlyMemory<char>>(c)).ToArray();
                 while (rc.MoveNext())
                 {
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => { ReadOnlyMemory<char> s = null; getters[i](ref s); return s.ToString(); });
                     allRecords.Add(record);
                 }

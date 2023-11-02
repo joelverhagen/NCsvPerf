@@ -11,20 +11,9 @@ namespace Knapcode.NCsvPerf.CsvReadable
     /// </summary>
     public class Sylvan_Data_Csv : ICsvReader
     {
-        private readonly ActivationMethod _activationMethod;
-
-        public Sylvan_Data_Csv(ActivationMethod activationMethod)
-        {
-            _activationMethod = activationMethod;
-        }
-
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
         {
-            var activate = ActivatorFactory.Create<T>(_activationMethod);
             var allRecords = new List<T>();
-#if ENABLE_STRING_POOLING
-            var stringPool = new StringPool(128);
-#endif
 
             using (var reader = new StreamReader(stream))
             {
@@ -33,14 +22,14 @@ namespace Knapcode.NCsvPerf.CsvReadable
                     HasHeaders = false,
                     BufferSize = 0x10000,
 #if ENABLE_STRING_POOLING
-                    StringFactory = stringPool.GetString,
+                    StringFactory = new StringPool(128).GetString,
 #endif
                 };
 
                 var csvReader = CsvDataReader.Create(reader, options);
                 while (csvReader.Read())
                 {
-                    var record = activate();
+                    var record = new T();
                     record.Read(i => csvReader.GetString(i));
                     allRecords.Add(record);
                 }
