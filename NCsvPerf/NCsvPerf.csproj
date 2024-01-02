@@ -40,7 +40,7 @@
     <PackageReference Include="NReco.Csv" Version="1.0.2" />
     <PackageReference Include="Open.Text.CSV" Version="3.4.0" />
     <PackageReference Include="RecordParser" Version="2.1.0" />
-    <PackageReference Include="Sep" Version="0.2.7" />
+    <PackageReference Include="Sep" Version="0.4.0" />
     <PackageReference Include="ServiceStack.Text" Version="6.11.0" />
     <PackageReference Include="Sky.Data.Csv" Version="2.5.0" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="4.1.0" />

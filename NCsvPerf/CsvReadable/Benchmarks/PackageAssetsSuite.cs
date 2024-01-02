@@ -242,6 +242,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Sep_MT()
+        {
+            Execute(new Sep_MT());
+        }
+
+        [Benchmark]
         public void ServiceStack_Text()
         {
             Execute(new ServiceStack_Text());
