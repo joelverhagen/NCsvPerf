@@ -14,7 +14,7 @@ namespace Knapcode.NCsvPerf
 #else
             config = null;
 #endif
-            BenchmarkRunner.Run<PackageAssetsSuite>(config);
+            BenchmarkRunner.Run<PackageAssetsSuite>(config, args);
         }
     }
 }
