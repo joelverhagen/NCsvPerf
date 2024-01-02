@@ -20,9 +20,8 @@ namespace Knapcode.NCsvPerf.CsvReadable
                 var options = new CsvDataReaderOptions
                 {
                     HasHeaders = false,
-                    BufferSize = 0x10000,
 #if ENABLE_STRING_POOLING
-                    StringFactory = new StringPool(128).GetString,
+                    ColumnStringFactory = new StringPool(128).GetString,
 #endif
                 };
 
