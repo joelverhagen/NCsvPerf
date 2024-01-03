@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Order;
 
 namespace Knapcode.NCsvPerf.CsvReadable.TestCases
 {
     [MemoryDiagnoser]
-    [SimpleJob(1, 2, 6, 1)]
+    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class PackageAssetsSuite
     {
         private byte[] _bytes;
