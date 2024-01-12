@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NCsvPerf.Test", "NCsvPerf.T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE459907-6D10-484A-B79E-8B4C67E6E624}"
 	ProjectSection(SolutionItems) = preProject
+		bench.ps1 = bench.ps1
 		.github\workflows\build.yml = .github\workflows\build.yml
 		global.json = global.json
 		LICENSE = LICENSE
