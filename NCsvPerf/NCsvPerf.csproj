@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Addax.Formats.Tabular" Version="1.2.0" />
     <PackageReference Include="Angara.Table" Version="0.3.3" NoWarn="NU1701" />
     <PackageReference Include="Angara.Serialization" Version="0.3.0" NoWarn="NU1701" />
     <PackageReference Include="Angara.Statistics" Version="0.1.4" NoWarn="NU1701" />

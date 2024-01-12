@@ -57,6 +57,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void Addax_Formats_Tabular()
+        {
+            Execute(new Addax_Formats_Tabular());
+        }
+
+        [Benchmark]
         public void Angara_Table()
         {
             Execute(new Angara_Table());
