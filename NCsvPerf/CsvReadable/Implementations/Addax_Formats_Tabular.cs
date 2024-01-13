@@ -1,4 +1,5 @@
 ﻿using Addax.Formats.Tabular;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -14,7 +15,7 @@ namespace Knapcode.NCsvPerf.CsvReadable
 
         public Addax_Formats_Tabular()
         {
-            _dialect = new TabularDialect("\r\n", ',', '\"');
+            _dialect = new TabularDialect(Environment.NewLine, ',', '\"');
         }
 
         public List<T> GetRecords<T>(MemoryStream stream) where T : ICsvReadable, new()
