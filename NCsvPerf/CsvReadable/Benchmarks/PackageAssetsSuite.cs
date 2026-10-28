@@ -105,6 +105,12 @@ namespace Knapcode.NCsvPerf.CsvReadable.TestCases
         }
 
         [Benchmark]
+        public void CsvHelper_MT()
+        {
+            Execute(new CsvHelper_MT());
+        }
+
+        [Benchmark]
         public void CsvTextFieldParser()
         {
             Execute(new CsvTextFieldParser());

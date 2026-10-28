@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Knapcode.NCsvPerf</RootNamespace>
     <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
     <DefineConstants>ENABLE_STRING_POOLING</DefineConstants>
@@ -19,7 +19,7 @@
     <PackageReference Include="ChoETL" Version="1.2.1.64" />
     <PackageReference Include="Csv" Version="2.0.93" />
     <PackageReference Include="CSVFile" Version="3.1.1" /> <!-- 3.1.2 is broken per https://github.com/tspence/csharp-csv-reader/issues/62 -->
-    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="CsvHelper" Version="34.0.0" />
     <PackageReference Include="CsvTextFieldParser" Version="1.2.2" />
     <PackageReference Include="CsvTools" Version="1.0.12" NoWarn="NU1701" />
     <PackageReference Include="Ctl.Data" Version="2.0.0.2" />
@@ -41,12 +41,12 @@
     <PackageReference Include="NReco.Csv" Version="1.0.2" />
     <PackageReference Include="Open.Text.CSV" Version="3.4.0" />
     <PackageReference Include="RecordParser" Version="2.3.0" />
-    <PackageReference Include="Sep" Version="0.4.0" />
+    <PackageReference Include="Sep" Version="0.17.1" />
     <PackageReference Include="ServiceStack.Text" Version="8.0.0" />
     <PackageReference Include="Sky.Data.Csv" Version="2.5.0" />
     <PackageReference Include="SoftCircuits.CsvParser" Version="4.1.0" />
     <PackageReference Include="Sylvan.Common" Version="0.4.3" />
-    <PackageReference Include="Sylvan.Data.Csv" Version="1.3.5" />
+    <PackageReference Include="Sylvan.Data.Csv" Version="1.4.4" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" NoWarn="NU1608" />
     <PackageReference Include="TinyCsvParser" Version="2.7.0" />
     <PackageReference Include="TxtCsvHelper" Version="1.3.3" />

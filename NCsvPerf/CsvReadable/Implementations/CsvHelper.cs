@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Knapcode.NCsvPerf.CsvReadable
@@ -14,21 +14,19 @@ namespace Knapcode.NCsvPerf.CsvReadable
         {
             var allRecords = new List<T>();
 
-            using (var reader = new StreamReader(stream))
+            var config = new global::CsvHelper.CsvReaderOptions
             {
-                var config = new global::CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
-                {
+                HasHeader = false,
 #if ENABLE_STRING_POOLING
-                    CacheFields = true,
+                PoolStrings = true,
 #endif
-                };
-                var csvParser = new global::CsvHelper.CsvParser(reader, config);
-                while (csvParser.Read())
-                {
-                    var record = new T();
-                    record.Read(i => csvParser[i]);
-                    allRecords.Add(record);
-                }
+            };
+            using var reader = global::CsvHelper.CsvReader.Create(stream, config);
+            while (reader.Read())
+            {
+                var record = new T();
+                record.Read(i => reader.GetString(i));
+                allRecords.Add(record);
             }
 
             return allRecords;
